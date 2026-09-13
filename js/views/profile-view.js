@@ -1,11 +1,10 @@
 /**
- * Profile View Component: TransformNXT
+ * Profile View Component: TransformNXT (Light Minimalist Glass)
  * Handles user demographics and smart weight machine bio-impedance data entry.
  */
 
 import { dbService } from "../storage/db.js";
 import { calculateIndianBMI } from "../engines/bmi-engine.js";
-import { determineMetabolicPhenotype } from "../engines/bia-engine.js";
 import { calculateEnergyAndMacros, generateIndianWeeklyMealPlan } from "../engines/diet-engine.js";
 import { generateWeeklyExercisePlan } from "../engines/workout-engine.js";
 
@@ -19,7 +18,6 @@ export class ProfileView {
     const user = await dbService.getCurrentUser();
     const latestLog = user ? await dbService.getLatestHealthLog(user.user_id) : null;
 
-    // Default values if first time
     const name = user ? user.name : "Arjun Sharma";
     const age = user ? user.age : 32;
     const gender = user ? user.gender : "male";
@@ -27,32 +25,34 @@ export class ProfileView {
     const region = user ? user.region_cuisine : "north";
     const activity = user ? user.activity_level : "sedentary";
 
-    const weight = latestLog ? latestLog.weight_kg : 76.5;
-    const height = latestLog ? latestLog.height_cm : 172;
-    const vfr = latestLog ? latestLog.visceral_fat_rating : 12;
-    const bodyFat = latestLog ? latestLog.body_fat_percent : 26.5;
-    const muscle = latestLog ? latestLog.muscle_mass_kg : 29.5;
-    const subFat = latestLog ? latestLog.subcutaneous_fat_percent : 21.0;
-    const water = latestLog ? latestLog.body_water_percent : 52.0;
+    const weight = latestLog ? latestLog.weight_kg : 74.0;
+    const height = latestLog ? latestLog.height_cm : 175;
+    const vfr = latestLog ? latestLog.visceral_fat_rating : 11;
+    const bodyFat = latestLog ? latestLog.body_fat_percent : 25.5;
+    const muscle = latestLog ? latestLog.muscle_mass_kg : 28.8;
+    const subFat = latestLog ? latestLog.subcutaneous_fat_percent : 20.0;
+    const water = latestLog ? latestLog.body_water_percent : 53.0;
 
     this.container.innerHTML = `
       <div style="max-width: 880px; margin: 0 auto;">
-        <div style="margin-bottom: 24px;">
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 6px;">
-            <span class="telemetry-badge badge-optimal">PROFILE & TELEMETRY</span>
-            <span class="brand-tag">ASIAN-INDIAN STANDARDS</span>
+        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
+              <span class="telemetry-badge badge-optimal">PROFILE & TELEMETRY</span>
+              <span class="brand-tag">ASIAN-INDIAN STANDARDS</span>
+            </div>
+            <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Individual Profile & Smart Scale Ingestion</h1>
           </div>
-          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Individual Profile & Smart Scale Ingestion</h1>
-          <p style="color: var(--text-secondary); font-size: 0.9375rem;">
-            Configure your anthropometric baseline and sync biometric outputs provided by modern multi-frequency BIA smart weight machines.
-          </p>
+          <button class="btn-orange btn-sm" id="btn-reset-onboarding">
+            Rerun Onboarding Wizard
+          </button>
         </div>
 
         <form id="profile-form">
           <!-- Step 1: Demographics & Lifestyle -->
           <div class="glass-card" style="margin-bottom: 20px;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-              <h2 style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF;">1. Demographics & Dietary Background</h2>
+              <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">1. Demographics & Dietary Background</h2>
               <span class="telemetry-badge badge-cyan">CULTURAL CALIBRATION</span>
             </div>
 
@@ -112,7 +112,7 @@ export class ProfileView {
           <div class="glass-card" style="margin-bottom: 20px;">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
               <div>
-                <h2 style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF;">2. Smart Weight Machine Biomarkers (BIA)</h2>
+                <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">2. Smart Weight Machine Biomarkers (BIA)</h2>
                 <span style="font-size: 0.8125rem; color: var(--text-secondary);">Direct input from your Bluetooth / Smart Body Scale</span>
               </div>
               <span class="telemetry-badge badge-optimal"><span class="beacon-dot optimal"></span> MULTI-FREQUENCY BIA</span>
@@ -130,7 +130,7 @@ export class ProfileView {
               <div class="form-group">
                 <label class="form-label" for="prof-vfr">Visceral Fat Level (1-59)*</label>
                 <input class="form-input" type="number" id="prof-vfr" min="1" max="59" value="${vfr}" required />
-                <span style="font-size: 0.6875rem; color: var(--text-secondary);">Optimal: 1-9 | Hazard: >13</span>
+                <span style="font-size: 0.6875rem; color: var(--text-muted);">Optimal: 1-9 | Hazard: >13</span>
               </div>
               <div class="form-group">
                 <label class="form-label" for="prof-bodyfat">Body Fat %</label>
@@ -159,9 +159,9 @@ export class ProfileView {
           </div>
 
           <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
-            <button type="submit" class="btn-laser" style="padding: 14px 32px; font-size: 1rem;">
+            <button type="submit" class="btn-green" style="padding: 14px 32px; font-size: 1rem;">
               <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-              Process Telemetry & Generate Plan
+              Recalculate & Sync Telemetry
             </button>
           </div>
         </form>
@@ -172,6 +172,11 @@ export class ProfileView {
   }
 
   attachEvents() {
+    document.getElementById("btn-reset-onboarding")?.addEventListener("click", () => {
+      this.app.lockNavigationForOnboarding(true);
+      this.app.navigateTo("onboarding");
+    });
+
     const form = document.getElementById("profile-form");
     if (!form) return;
 
@@ -193,8 +198,9 @@ export class ProfileView {
       const subcutaneous_fat_percent = parseFloat(document.getElementById("prof-subfat").value) || 20;
       const body_water_percent = parseFloat(document.getElementById("prof-water").value) || 52;
 
-      const userId = "usr_" + Math.random().toString(36).substr(2, 9);
-      const user = {
+      let user = await dbService.getCurrentUser();
+      const userId = user ? user.user_id : ("usr_" + Date.now());
+      user = {
         user_id: userId,
         name,
         age,
@@ -206,7 +212,6 @@ export class ProfileView {
       };
       await dbService.saveUser(user);
 
-      // BMI & Health Log
       const bmiCalc = calculateIndianBMI(weight_kg, height_cm);
       const logId = "hl_" + Date.now();
       const healthLog = {
@@ -224,7 +229,6 @@ export class ProfileView {
       };
       await dbService.addHealthLog(healthLog);
 
-      // Run Engine: Energy & Macros
       const energyData = calculateEnergyAndMacros({
         weightKg: weight_kg,
         heightCm: height_cm,
@@ -236,7 +240,6 @@ export class ProfileView {
         muscleMassKg: muscle_mass_kg
       });
 
-      // Run Engine: Diet Plan
       const mealPlan = generateIndianWeeklyMealPlan({
         regionalPreference: region_cuisine,
         dietaryPreference: dietary_preference,
@@ -244,14 +247,12 @@ export class ProfileView {
         targetProteinG: energyData.targetProteinG
       });
 
-      // Run Engine: Exercise Plan
       const exercisePlan = generateWeeklyExercisePlan({
         phenotypeKey: energyData.phenotypeResult.phenotype.key,
         weightKg: weight_kg,
         activityLevel: activity_level
       });
 
-      // Save Weekly Plan
       const planId = "wp_" + Date.now();
       const weeklyPlan = {
         plan_id: planId,
@@ -270,8 +271,8 @@ export class ProfileView {
       };
       await dbService.saveWeeklyPlan(weeklyPlan);
 
-      // Notify and navigate to Dashboard
-      this.app.showNotification("Telemetry saved & validated plan generated successfully!");
+      this.app.showNotification("Telemetry updated & new plan generated!");
+      await this.app.updateHeaderUser();
       this.app.navigateTo("dashboard");
     });
   }

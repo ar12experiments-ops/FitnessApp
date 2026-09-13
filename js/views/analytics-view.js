@@ -1,5 +1,5 @@
 /**
- * Analytics & Progress History Component: TransformNXT
+ * Analytics & Progress History Component: TransformNXT (Light Minimalist Glass)
  * Displays multi-day compliance trends, smart scale bio-impedance deltas,
  * and JSON data backup/restore capabilities.
  */
@@ -14,8 +14,13 @@ export class AnalyticsView {
 
   async render() {
     const user = await dbService.getCurrentUser();
-    const healthLogs = user ? await dbService.getHealthLogs(user.user_id) : [];
-    const trackingLogs = user ? await dbService.getAllDailyTrackings(user.user_id) : [];
+    if (!user) {
+      this.app.navigateTo("onboarding");
+      return;
+    }
+
+    const healthLogs = await dbService.getHealthLogs(user.user_id);
+    const trackingLogs = await dbService.getAllDailyTrackings(user.user_id);
 
     this.container.innerHTML = `
       <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
@@ -24,7 +29,7 @@ export class AnalyticsView {
             <span class="telemetry-badge badge-optimal">LONGITUDINAL TELEMETRY</span>
             <span class="brand-tag">PROGRESS ANALYTICS</span>
           </div>
-          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Health Metrics & Compliance History</h1>
+          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Health Metrics & Compliance History</h1>
         </div>
 
         <div style="display: flex; gap: 10px;">
@@ -45,7 +50,7 @@ export class AnalyticsView {
         <!-- Health Logs History -->
         <div class="glass-card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h2 style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF;">Smart Scale Time-Series</h2>
+            <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">Smart Scale Time-Series</h2>
             <span class="telemetry-badge badge-cyan">${healthLogs.length} Records</span>
           </div>
 
@@ -54,15 +59,15 @@ export class AnalyticsView {
           ` : `
             <div style="display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto;">
               ${healthLogs.map(l => `
-                <div style="background: rgba(14, 14, 14, 0.7); border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 12px;">
+                <div style="background: #FFFFFF; border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                    <strong style="color: #FFFFFF; font-size: 0.9375rem;">${new Date(l.timestamp).toLocaleDateString()}</strong>
+                    <strong style="color: var(--text-primary); font-size: 0.9375rem;">${new Date(l.timestamp).toLocaleDateString()}</strong>
                     <span class="telemetry-badge badge-optimal">${l.bmi_calculated} BMI</span>
                   </div>
                   <div style="display: flex; gap: 14px; font-size: 0.8125rem; color: var(--text-secondary); font-family: var(--font-family-telemetry);">
-                    <span>Weight: <strong style="color: #FFFFFF;">${l.weight_kg} kg</strong></span>
-                    <span>Visceral Fat: <strong style="color: ${l.visceral_fat_rating > 13 ? 'var(--telemetry-crimson)' : 'var(--accent-laser-green)'};">${l.visceral_fat_rating}</strong></span>
-                    <span>Muscle: <strong style="color: var(--accent-laser-green);">${l.muscle_mass_kg} kg</strong></span>
+                    <span>Weight: <strong style="color: var(--text-primary);">${l.weight_kg} kg</strong></span>
+                    <span>Visceral Fat: <strong style="color: ${l.visceral_fat_rating > 13 ? 'var(--telemetry-crimson)' : 'var(--accent-green)'};">${l.visceral_fat_rating}</strong></span>
+                    <span>Muscle: <strong style="color: var(--accent-green);">${l.muscle_mass_kg} kg</strong></span>
                   </div>
                 </div>
               `).join("")}
@@ -73,8 +78,8 @@ export class AnalyticsView {
         <!-- Daily Adherence History -->
         <div class="glass-card">
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <h2 style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF;">Daily Plan Match Compliance</h2>
-            <span class="telemetry-badge badge-optimal">${trackingLogs.length} Tracked Days</span>
+            <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">Daily Plan Match Compliance</h2>
+            <span class="telemetry-badge badge-orange">${trackingLogs.length} Tracked Days</span>
           </div>
 
           ${trackingLogs.length === 0 ? `
@@ -82,16 +87,16 @@ export class AnalyticsView {
           ` : `
             <div style="display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto;">
               ${trackingLogs.map(t => `
-                <div style="background: rgba(14, 14, 14, 0.7); border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 12px;">
+                <div style="background: #FFFFFF; border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
-                    <strong style="color: #FFFFFF; font-size: 0.9375rem;">${t.date}</strong>
-                    <span class="telemetry-badge ${t.compliance_score_percent >= 80 ? 'badge-optimal' : 'badge-warning'}">
+                    <strong style="color: var(--text-primary); font-size: 0.9375rem;">${t.date}</strong>
+                    <span class="telemetry-badge ${t.compliance_score_percent >= 80 ? 'badge-optimal' : 'badge-orange'}">
                       ${t.compliance_score_percent}% Match
                     </span>
                   </div>
                   <div style="display: flex; gap: 14px; font-size: 0.8125rem; color: var(--text-secondary); font-family: var(--font-family-telemetry);">
-                    <span>Cals: <strong style="color: #FFFFFF;">${t.calories_consumed}</strong></span>
-                    <span>Protein: <strong style="color: var(--accent-laser-green);">${t.protein_consumed}g</strong></span>
+                    <span>Cals: <strong style="color: var(--text-primary);">${t.calories_consumed}</strong></span>
+                    <span>Protein: <strong style="color: var(--accent-green);">${t.protein_consumed}g</strong></span>
                     <span>Exercises: <strong style="color: var(--telemetry-cyan);">${t.exercises_completed ? t.exercises_completed.length : 0} done</strong></span>
                   </div>
                 </div>
@@ -107,7 +112,6 @@ export class AnalyticsView {
   }
 
   attachEvents() {
-    // Export Backup
     document.getElementById("btn-export-backup")?.addEventListener("click", async () => {
       const backupJson = await dbService.exportCompleteBackup();
       const blob = new Blob([backupJson], { type: "application/json" });
@@ -117,10 +121,9 @@ export class AnalyticsView {
       a.download = `TransformNXT_Backup_${new Date().toISOString().split("T")[0]}.json`;
       a.click();
       URL.revokeObjectURL(url);
-      this.app.showNotification("Encrypted telemetry backup downloaded successfully!");
+      this.app.showNotification("Encrypted telemetry backup downloaded!");
     });
 
-    // Import Backup
     const fileInput = document.getElementById("file-import-backup");
     fileInput?.addEventListener("change", async (e) => {
       const file = e.target.files[0];

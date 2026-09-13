@@ -1,53 +1,58 @@
 /* ==========================================================================
-   TransformNXT Design System: Cyber-Clinical Glass Tokens
-   Infinite Black (#000000), Cyber Laser Green (#00FF66), Translucent Frosted Glass
+   TransformNXT Design Tokens: Light Minimalist Glass Theme
+   Crisp White Canvas (#FAFAFA), Frosted Floating Glass, Emerald Green & Sunset Orange Accents
    ========================================================================== */
 
 :root {
-  /* Canvas & Void Base */
-  --bg-void: #000000;
-  --bg-space: #080808;
-  --bg-surface-glass: rgba(20, 20, 20, 0.65);
-  --bg-surface-glass-hover: rgba(28, 28, 28, 0.8);
-  --bg-surface-elevated: rgba(30, 30, 30, 0.85);
-  --bg-input-glass: rgba(14, 14, 14, 0.7);
+  /* Canvas & Light Void Base */
+  --bg-void: #F8FAFC;              /* Clean soft white-slate canvas */
+  --bg-space: #FFFFFF;             /* Pure white background */
+  --bg-surface-glass: rgba(255, 255, 255, 0.78);     /* Translucent floating glass tile */
+  --bg-surface-glass-hover: rgba(255, 255, 255, 0.92);/* Hover glass state */
+  --bg-surface-elevated: #FFFFFF;                     /* Popovers, modals */
+  --bg-input-glass: rgba(241, 245, 249, 0.75);        /* Soft input background */
 
-  /* Primary Signature Accent: Cyber Laser Green */
-  --accent-laser-green: #00FF66;
-  --accent-laser-green-hover: #1aff75;
-  --accent-laser-green-glow: rgba(0, 255, 102, 0.35);
-  --accent-laser-green-subtle: rgba(0, 255, 102, 0.12);
+  /* Signature Accents: Vibrant Green & Warm Sunset Orange */
+  --accent-green: #10B981;          /* Emerald Green (Optimal health, protein, primary CTA) */
+  --accent-green-hover: #059669;
+  --accent-green-glow: rgba(16, 185, 129, 0.25);
+  --accent-green-subtle: rgba(16, 185, 129, 0.12);
 
-  /* Telemetry Status Spectrum */
-  --telemetry-optimal: #00FF66;    /* Optimal status / Met targets */
-  --telemetry-cyan: #00F0FF;       /* Hydration / Bio-impedance water % / Aerobic */
-  --telemetry-amber: #FFB800;      /* Warning / Asian-Indian Overweight threshold */
-  --telemetry-crimson: #FF2D55;    /* High risk / Visceral fat hazard / Deficit */
-  --telemetry-purple: #BF5AF2;     /* Muscle mass / Hypertrophy */
+  --accent-orange: #F97316;         /* Sunset Orange (Workouts, energy, secondary CTA) */
+  --accent-orange-hover: #EA580C;
+  --accent-orange-glow: rgba(249, 115, 22, 0.25);
+  --accent-orange-subtle: rgba(249, 115, 22, 0.12);
 
-  /* Text & Data Contrast */
-  --text-primary: #FFFFFF;
-  --text-secondary: #8E8E93;
-  --text-tertiary: #545458;
-  --text-laser: #00FF66;
+  /* Telemetry Status Spectrum (Light Adapted) */
+  --telemetry-optimal: #10B981;     /* Emerald Green */
+  --telemetry-cyan: #0284C7;        /* Deep Sky Cyan */
+  --telemetry-amber: #D97706;       /* Warm Amber */
+  --telemetry-crimson: #EF4444;     /* Crisp Red */
+  --telemetry-purple: #8B5CF6;      /* Vibrant Purple */
 
-  /* Glass Hairlines & Borders */
-  --border-glass-default: rgba(255, 255, 255, 0.08);
-  --border-glass-hover: rgba(255, 255, 255, 0.16);
-  --border-glass-laser: rgba(0, 255, 102, 0.28);
-  --border-glass-risk: rgba(255, 45, 85, 0.35);
+  /* Text & Contrast Hierarchy (Dark on Light) */
+  --text-primary: #0F172A;          /* Deep Slate (Headers, primary data) */
+  --text-secondary: #475569;        /* Medium Slate (Labels, descriptions) */
+  --text-muted: #94A3B8;            /* Soft Muted Grey (Units, timestamps) */
 
-  /* Shadows & Neon Drops */
-  --shadow-glass-depth: 0 8px 32px 0 rgba(0, 0, 0, 0.55);
-  --shadow-laser-glow: 0 0 20px rgba(0, 255, 102, 0.25);
-  --shadow-laser-glow-lg: 0 0 35px rgba(0, 255, 102, 0.45);
-  --shadow-risk-glow: 0 0 20px rgba(255, 45, 85, 0.3);
+  /* Structural Hairlines & Borders */
+  --border-glass-default: rgba(15, 23, 42, 0.08);
+  --border-glass-hover: rgba(15, 23, 42, 0.16);
+  --border-glass-green: rgba(16, 185, 129, 0.35);
+  --border-glass-orange: rgba(249, 115, 22, 0.35);
+  --border-glass-risk: rgba(239, 68, 68, 0.35);
+
+  /* Shadows for Floating Glass Tiles */
+  --shadow-glass-depth: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
+  --shadow-glass-hover: 0 20px 30px -10px rgba(15, 23, 42, 0.08), 0 0 18px rgba(16, 185, 129, 0.15);
+  --shadow-orange-glow: 0 0 20px rgba(249, 115, 22, 0.2);
+  --shadow-green-glow: 0 0 20px rgba(16, 185, 129, 0.2);
 
   /* Radii */
   --radius-xs: 6px;
   --radius-sm: 10px;
-  --radius-md: 16px;
-  --radius-lg: 22px;
+  --radius-md: 18px;
+  --radius-lg: 24px;
   --radius-full: 9999px;
 
   /* Blur Filters */

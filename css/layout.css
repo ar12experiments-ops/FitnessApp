@@ -1,6 +1,5 @@
 /* ==========================================================================
-   TransformNXT: Layout & Responsive Structure
-   HUD Header, Views Container, Desktop Navigation & Sticky Mobile Glass Nav
+   TransformNXT: Layout & Responsive Structure (Light Minimalist Glass Theme)
    ========================================================================== */
 
 /* Main Layout Grid */
@@ -32,30 +31,30 @@
 }
 
 .brand-logo-icon {
-  width: 36px;
-  height: 36px;
-  background: rgba(0, 255, 102, 0.15);
-  border: 1px solid var(--accent-laser-green);
+  width: 38px;
+  height: 38px;
+  background: var(--accent-green-subtle);
+  border: 1px solid var(--accent-green);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-laser-green);
-  box-shadow: 0 0 14px var(--accent-laser-green-glow);
+  color: var(--accent-green);
+  box-shadow: 0 2px 8px var(--accent-green-glow);
 }
 
 .brand-title {
   font-size: 1.375rem;
   font-weight: 800;
   letter-spacing: -0.02em;
-  color: #FFFFFF;
+  color: var(--text-primary);
   display: flex;
   align-items: baseline;
   gap: 4px;
 }
 
 .brand-title span {
-  color: var(--accent-laser-green);
+  color: var(--accent-orange);
 }
 
 .brand-tag {
@@ -64,6 +63,7 @@
   font-family: var(--font-family-telemetry);
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  font-weight: 600;
 }
 
 /* Header Telemetry Status */
@@ -77,7 +77,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--bg-surface-glass);
+  background: #FFFFFF;
   border: 1px solid var(--border-glass-default);
   padding: 6px 14px;
   border-radius: var(--radius-full);
@@ -85,26 +85,34 @@
   color: var(--text-primary);
   font-weight: 600;
   cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   transition: all 0.2s ease;
 }
 
 .profile-pill:hover {
-  border-color: var(--border-glass-laser);
+  border-color: var(--accent-green);
+  box-shadow: 0 0 10px var(--accent-green-glow);
 }
 
-/* Desktop Navigation Bar */
+/* Desktop Navigation Bar with Green & Orange Accents */
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: var(--glass-blur-default);
+  padding: 4px 6px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-glass-default);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 18px;
-  border-radius: var(--radius-sm);
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
   color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.875rem;
@@ -116,14 +124,21 @@
 
 .nav-link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(0, 0, 0, 0.03);
 }
 
 .nav-link.active {
-  color: var(--accent-laser-green);
-  background: rgba(0, 255, 102, 0.08);
-  border-color: var(--border-glass-laser);
-  box-shadow: 0 0 12px rgba(0, 255, 102, 0.15);
+  color: var(--accent-green-hover);
+  background: #FFFFFF;
+  border-color: var(--accent-green);
+  box-shadow: 0 2px 8px var(--accent-green-glow);
+}
+
+/* Special styling for Chatbot tab with orange accent */
+.nav-link[data-view="chatbot"].active {
+  color: var(--accent-orange-hover);
+  border-color: var(--accent-orange);
+  box-shadow: 0 2px 8px var(--accent-orange-glow);
 }
 
 /* Views Container */
@@ -147,7 +162,7 @@
   }
 }
 
-/* Dashboard Layout */
+/* Grid Layouts */
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -173,14 +188,14 @@
   bottom: 12px;
   left: 16px;
   right: 16px;
-  background: rgba(14, 14, 14, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: var(--glass-blur-heavy);
   -webkit-backdrop-filter: var(--glass-blur-heavy);
   border: 1px solid var(--border-glass-default);
   border-radius: var(--radius-full);
   padding: 8px 12px;
   z-index: 100;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   justify-content: space-around;
 }
 
@@ -201,8 +216,13 @@
 }
 
 .mobile-nav-btn.active {
-  color: var(--accent-laser-green);
-  background: rgba(0, 255, 102, 0.12);
+  color: var(--accent-green-hover);
+  background: var(--accent-green-subtle);
+}
+
+.mobile-nav-btn[data-view="chatbot"].active {
+  color: var(--accent-orange-hover);
+  background: var(--accent-orange-subtle);
 }
 
 .mobile-nav-btn svg {

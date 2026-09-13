@@ -1,5 +1,5 @@
 /**
- * Daily Tracking & Adherence Matching Component: TransformNXT
+ * Daily Tracking & Adherence Matching Component: TransformNXT (Light Minimalist Glass)
  * Allows users to log Indian food items with authentic portions,
  * check off prescribed exercises, and observe their real-time Plan Match Score.
  */
@@ -31,14 +31,7 @@ export class TrackingView {
     const plan = user ? await dbService.getLatestWeeklyPlan(user.user_id) : null;
 
     if (!user || !plan) {
-      this.container.innerHTML = `
-        <div class="glass-card" style="text-align: center; max-width: 600px; margin: 40px auto; padding: 40px;">
-          <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;">No Profile Configured</h2>
-          <p style="color: var(--text-secondary); margin-bottom: 24px;">Please create a profile before logging daily food and exercises.</p>
-          <button class="btn-laser" id="btn-goto-prof-track">Create Profile</button>
-        </div>
-      `;
-      document.getElementById("btn-goto-prof-track")?.addEventListener("click", () => this.app.navigateTo("profile"));
+      this.app.navigateTo("onboarding");
       return;
     }
 
@@ -50,7 +43,6 @@ export class TrackingView {
       this.recalcTotals();
     }
 
-    // Determine today's day of week to fetch prescribed workout
     const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const todayDayName = dayNames[new Date().getDay()];
     const workoutDays = plan.exercise_routine ? plan.exercise_routine.daysPlan : [];
@@ -68,14 +60,13 @@ export class TrackingView {
       completedExercisesCount: this.currentTrackData.exercises.length
     });
 
-    // Ring stroke calculation
     const strokeDash = 377 - (377 * (compliance.overallScore / 100));
 
-    // Filtered food catalog for quick addition
+    // Filtered food catalog
     const filteredFoods = filterFoods({
       category: this.selectedFoodCategory,
       query: this.activeFoodSearch
-    }).slice(0, 8); // Top 8 matches
+    }).slice(0, 8);
 
     this.container.innerHTML = `
       <!-- Header -->
@@ -85,16 +76,16 @@ export class TrackingView {
             <span class="telemetry-badge badge-optimal"><span class="beacon-dot optimal"></span> LIVE TRACKING</span>
             <span class="brand-tag">DATE: ${this.todayStr} (${todayDayName.toUpperCase()})</span>
           </div>
-          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Daily Intake & Workout Logger</h1>
+          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Daily Intake & Workout Logger</h1>
         </div>
 
-        <button class="btn-laser" id="btn-save-log-progress" style="padding: 10px 20px;">
+        <button class="btn-green" id="btn-save-log-progress" style="padding: 10px 20px;">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
           Save & Sync Daily Progress
         </button>
       </div>
 
-      <!-- Live Adherence Ribbon -->
+      <!-- Live Adherence Ribbon (Light Theme) -->
       <div class="glass-card" style="margin-bottom: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;">
         <div style="display: flex; align-items: center; gap: 20px;">
           <div class="compliance-ring-container" style="width: 90px; height: 90px;">
@@ -111,11 +102,11 @@ export class TrackingView {
 
           <div>
             <span class="form-label">CURRENT PLAN MATCH ADHERENCE</span>
-            <h2 style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF; margin-top: 2px;">
+            <h2 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary); margin-top: 2px;">
               ${compliance.statusBadge}
             </h2>
             <div style="font-size: 0.8125rem; color: var(--text-secondary); margin-top: 2px;">
-              Target: ${plan.target_daily_calories} kcal &bull; Consumed: <strong style="color: #FFFFFF;">${this.currentTrackData.totalCals} kcal</strong>
+              Target: ${plan.target_daily_calories} kcal &bull; Consumed: <strong style="color: var(--text-primary);">${this.currentTrackData.totalCals} kcal</strong>
             </div>
           </div>
         </div>
@@ -123,26 +114,26 @@ export class TrackingView {
         <!-- Real-time Macro Counters -->
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
           <div>
-            <span style="font-size: 0.75rem; color: var(--text-secondary);">PROTEIN FLOOR</span>
-            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--accent-laser-green);">
+            <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">PROTEIN FLOOR</span>
+            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--accent-green);">
               ${Math.round(this.currentTrackData.totalProtein * 10) / 10} / ${plan.target_protein_g}g
             </div>
           </div>
           <div>
-            <span style="font-size: 0.75rem; color: var(--text-secondary);">CARBS</span>
+            <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">CARBS</span>
             <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--telemetry-cyan);">
               ${Math.round(this.currentTrackData.totalCarbs * 10) / 10} / ${plan.target_carbs_g}g
             </div>
           </div>
           <div>
-            <span style="font-size: 0.75rem; color: var(--text-secondary);">FATS</span>
-            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--telemetry-amber);">
+            <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">FATS</span>
+            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--accent-orange);">
               ${Math.round(this.currentTrackData.totalFats * 10) / 10} / ${plan.target_fats_g}g
             </div>
           </div>
           <div>
-            <span style="font-size: 0.75rem; color: var(--text-secondary);">DIETARY FIBER</span>
-            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: #FFFFFF;">
+            <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">DIETARY FIBER</span>
+            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--text-primary);">
               ${Math.round(this.currentTrackData.totalFiber * 10) / 10} / ${plan.target_fiber_g}g
             </div>
           </div>
@@ -156,7 +147,7 @@ export class TrackingView {
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div>
               <span class="form-label">INDIAN NUTRITION TRACKER</span>
-              <h3 style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF;">Log Meal Items</h3>
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">Log Meal Items</h3>
             </div>
             <span class="telemetry-badge badge-optimal">ICMR-NIN IFCT CALIBRATED</span>
           </div>
@@ -167,7 +158,7 @@ export class TrackingView {
               class="form-input" 
               type="text" 
               id="input-food-search" 
-              placeholder="Search Indian dishes (e.g., Dal Tadka, Phulka, Paneer, Chicken, Sattu)..." 
+              placeholder="Search Indian dishes (e.g., Dal Tadka, Phulka, Paneer, Sattu, Chicken)..." 
               value="${this.activeFoodSearch}" 
             />
             <select class="form-select" id="select-food-category" style="max-width: 150px;">
@@ -186,14 +177,14 @@ export class TrackingView {
             ${filteredFoods.map(f => `
               <div class="food-card">
                 <div>
-                  <strong style="color: #FFFFFF; font-size: 0.9375rem;">${f.name}</strong>
+                  <strong style="color: var(--text-primary); font-size: 0.9375rem;">${f.name}</strong>
                   <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">
-                    Portion: ${f.serving_unit} &bull; <span style="color: var(--accent-laser-green);">${f.calories} kcal</span> (${f.protein}g Protein)
+                    Portion: ${f.serving_unit} &bull; <span style="color: var(--accent-green); font-weight: 600;">${f.calories} kcal</span> (${f.protein}g Protein)
                   </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <input type="number" class="form-input food-qty-input" data-food-id="${f.id}" min="0.5" max="10" step="0.5" value="1" style="width: 60px; padding: 6px; text-align: center;" />
-                  <button class="btn-laser btn-sm btn-add-food" data-food-id="${f.id}">
+                  <button class="btn-green btn-sm btn-add-food" data-food-id="${f.id}">
                     + Add
                   </button>
                 </div>
@@ -212,13 +203,13 @@ export class TrackingView {
             ` : `
               <div style="display: flex; flex-direction: column; gap: 6px;">
                 ${this.currentTrackData.meals.map((m, idx) => `
-                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: rgba(14, 14, 14, 0.7); border-radius: var(--radius-xs); font-size: 0.8125rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #F8FAFC; border: 1px solid var(--border-glass-default); border-radius: var(--radius-xs); font-size: 0.8125rem;">
                     <div>
-                      <strong style="color: #FFFFFF;">${m.name}</strong>
+                      <strong style="color: var(--text-primary);">${m.name}</strong>
                       <span style="color: var(--text-secondary); margin-left: 6px;">x${m.quantity} (${Math.round(m.calories)} kcal)</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 10px;">
-                      <span style="color: var(--accent-laser-green); font-family: var(--font-family-telemetry);">${Math.round(m.protein * 10) / 10}g P</span>
+                      <span style="color: var(--accent-green); font-family: var(--font-family-telemetry); font-weight: 600;">${Math.round(m.protein * 10) / 10}g P</span>
                       <button class="btn-glass btn-remove-meal" data-meal-index="${idx}" style="padding: 2px 8px; font-size: 0.75rem; color: var(--telemetry-crimson);">✕</button>
                     </div>
                   </div>
@@ -233,9 +224,9 @@ export class TrackingView {
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
             <div>
               <span class="form-label">TODAY'S EXERCISE EXECUTION</span>
-              <h3 style="font-size: 1.15rem; font-weight: 700; color: #FFFFFF;">${todayWorkout ? todayWorkout.sessionName : "Workout"}</h3>
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--text-primary);">${todayWorkout ? todayWorkout.sessionName : "Workout"}</h3>
             </div>
-            <span class="telemetry-badge badge-cyan">${todayWorkout ? todayWorkout.type.toUpperCase() : "ACTIVE"}</span>
+            <span class="telemetry-badge badge-orange">${todayWorkout ? todayWorkout.type.toUpperCase() : "ACTIVE"}</span>
           </div>
 
           <p style="font-size: 0.8125rem; color: var(--text-secondary); margin-bottom: 16px;">
@@ -249,11 +240,11 @@ export class TrackingView {
                 <div class="workout-item-card ${isChecked ? 'completed' : ''}" style="cursor: pointer;" data-ex-id="${ex.id}">
                   <div style="display: flex; justify-content: space-between; align-items: center;">
                     <div style="display: flex; align-items: center; gap: 12px;">
-                      <input type="checkbox" class="ex-checkbox" data-ex-id="${ex.id}" ${isChecked ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: var(--accent-laser-green); cursor: pointer;" />
+                      <input type="checkbox" class="ex-checkbox" data-ex-id="${ex.id}" ${isChecked ? 'checked' : ''} style="width: 18px; height: 18px; accent-color: var(--accent-green); cursor: pointer;" />
                       <div>
-                        <strong style="color: #FFFFFF; font-size: 0.9375rem;">${ex.name}</strong>
+                        <strong style="color: var(--text-primary); font-size: 0.9375rem;">${ex.name}</strong>
                         <div style="font-size: 0.75rem; color: var(--text-secondary);">
-                          ${ex.default_sets} sets &bull; ${ex.default_reps} &bull; <span style="color: var(--accent-laser-green);">${ex.target_muscle}</span>
+                          ${ex.default_sets} sets &bull; ${ex.default_reps} &bull; <span style="color: var(--accent-green); font-weight: 600;">${ex.target_muscle}</span>
                         </div>
                       </div>
                     </div>
@@ -266,8 +257,8 @@ export class TrackingView {
             }).join("")}
           </div>
 
-          <div style="margin-top: 20px; background: rgba(0, 255, 102, 0.05); border: 1px solid var(--border-glass-laser); border-radius: var(--radius-sm); padding: 12px; font-size: 0.8125rem; color: var(--text-secondary);">
-            <strong style="color: #FFFFFF;">Estimated Session Burn:</strong> ~${todayWorkout ? todayWorkout.estimatedCaloriesBurned : 0} kcal based on MET formulas.
+          <div style="margin-top: 20px; background: var(--accent-orange-subtle); border: 1px solid rgba(249, 115, 22, 0.25); border-radius: var(--radius-sm); padding: 14px; font-size: 0.8125rem; color: var(--text-secondary);">
+            <strong style="color: var(--text-primary);">Estimated Session Burn:</strong> ~${todayWorkout ? todayWorkout.estimatedCaloriesBurned : 0} kcal based on MET formulas.
           </div>
         </div>
 
@@ -300,7 +291,6 @@ export class TrackingView {
   }
 
   attachEvents() {
-    // Food search input
     const searchInput = document.getElementById("input-food-search");
     if (searchInput) {
       searchInput.addEventListener("input", (e) => {
@@ -309,7 +299,6 @@ export class TrackingView {
       });
     }
 
-    // Category filter
     const catSelect = document.getElementById("select-food-category");
     if (catSelect) {
       catSelect.addEventListener("change", (e) => {
@@ -318,7 +307,6 @@ export class TrackingView {
       });
     }
 
-    // Add food button
     this.container.querySelectorAll(".btn-add-food").forEach(btn => {
       btn.addEventListener("click", () => {
         const foodId = btn.dataset.foodId;
@@ -345,7 +333,6 @@ export class TrackingView {
       });
     });
 
-    // Remove meal button
     this.container.querySelectorAll(".btn-remove-meal").forEach(btn => {
       btn.addEventListener("click", () => {
         const idx = parseInt(btn.dataset.mealIndex, 10);
@@ -355,7 +342,6 @@ export class TrackingView {
       });
     });
 
-    // Exercise checkboxes
     this.container.querySelectorAll(".ex-checkbox").forEach(chk => {
       chk.addEventListener("change", (e) => {
         const exId = e.target.dataset.exId;
@@ -370,7 +356,6 @@ export class TrackingView {
       });
     });
 
-    // Save progress to IndexedDB
     document.getElementById("btn-save-log-progress")?.addEventListener("click", async () => {
       const user = await dbService.getCurrentUser();
       const plan = user ? await dbService.getLatestWeeklyPlan(user.user_id) : null;
@@ -403,7 +388,7 @@ export class TrackingView {
       };
 
       await dbService.saveDailyTracking(trackRecord);
-      this.app.showNotification(`Synced! Daily Plan Match Adherence: ${compliance.overallScore}%`);
+      this.app.showNotification(`Synced! Daily Plan Match: ${compliance.overallScore}%`);
     });
   }
 }

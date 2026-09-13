@@ -1,6 +1,6 @@
 /**
  * Dashboard View Component: TransformNXT
- * Displays the Cyber-Clinical telemetry deck: Asian-Indian BMI spectrum,
+ * Displays the Light Minimalist telemetry deck: Asian-Indian BMI spectrum,
  * Smart scale biomarker matrix, phenotype diagnostic, and adherence ring.
  */
 
@@ -20,9 +20,8 @@ export class DashboardView {
     let latestLog = user ? await dbService.getLatestHealthLog(user.user_id) : null;
     let plan = user ? await dbService.getLatestWeeklyPlan(user.user_id) : null;
 
-    // If no profile, provide pre-seeded action
     if (!user || !latestLog) {
-      this.renderEmptyState();
+      this.app.navigateTo("onboarding");
       return;
     }
 
@@ -65,14 +64,14 @@ export class DashboardView {
             <span class="telemetry-badge badge-optimal"><span class="beacon-dot optimal"></span> TELEMETRY ACTIVE</span>
             <span class="brand-tag">PATIENT: ${user.name.toUpperCase()} (${user.age}Y, ${user.gender.toUpperCase()})</span>
           </div>
-          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em;">Biomedical Deck & Telemetry</h1>
+          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Biomedical Deck & Telemetry</h1>
         </div>
         <div style="display: flex; gap: 10px;">
           <button class="btn-glass btn-sm" id="btn-relog-scale">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-            Update Smart Scale Data
+            Update Scale Data
           </button>
-          <button class="btn-laser btn-sm" id="btn-quick-track">
+          <button class="btn-green btn-sm" id="btn-quick-track">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             Log Today's Intake / Workout
           </button>
@@ -89,7 +88,7 @@ export class DashboardView {
               <div>
                 <span class="form-label">ANTHROPOMETRIC CLASSIFICATION</span>
                 <div style="display: flex; align-items: baseline; gap: 12px; margin-top: 4px;">
-                  <span style="font-size: 2.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: #FFFFFF;">
+                  <span style="font-size: 2.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--text-primary);">
                     ${bmiData.bmi} <span style="font-size: 1rem; color: var(--text-secondary); font-weight: 500;">kg/m²</span>
                   </span>
                   <span class="telemetry-badge ${bmiData.tier.badgeClass}">${bmiData.tier.label}</span>
@@ -97,7 +96,7 @@ export class DashboardView {
               </div>
               <div style="text-align: right;">
                 <span style="font-size: 0.75rem; color: var(--text-secondary); font-family: var(--font-family-telemetry);">IDEAL ASIAN-INDIAN WEIGHT</span>
-                <div style="font-size: 0.9375rem; font-weight: 700; color: var(--accent-laser-green);">
+                <div style="font-size: 0.9375rem; font-weight: 700; color: var(--accent-green);">
                   ${bmiData.idealWeightRange.minKg} - ${bmiData.idealWeightRange.maxKg} kg
                 </div>
               </div>
@@ -110,31 +109,31 @@ export class DashboardView {
               </div>
               <div class="bmi-labels">
                 <span>Underweight<br><strong>&lt; 18.5</strong></span>
-                <span>Normal<br><strong style="color: var(--accent-laser-green);">18.5 - 22.9</strong></span>
+                <span>Normal<br><strong style="color: var(--accent-green);">18.5 - 22.9</strong></span>
                 <span>Overweight<br><strong style="color: var(--telemetry-amber);">23.0 - 24.9</strong></span>
                 <span>Obese<br><strong style="color: var(--telemetry-crimson);">&ge; 25.0</strong></span>
               </div>
             </div>
 
-            <div style="margin-top: 14px; font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.4;">
+            <div style="margin-top: 14px; font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.45;">
               <strong>Clinical Context:</strong> ${bmiData.tier.clinicalRisk}
             </div>
           </div>
 
           <!-- Metabolic Phenotype Card -->
-          <div class="glass-card" style="border-left: 3px solid ${phenotypeData.phenotype.color};">
+          <div class="glass-card" style="border-left: 4px solid ${phenotypeData.phenotype.color};">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
               <span class="form-label">METABOLIC PHENOTYPE DIAGNOSTIC</span>
               <span class="telemetry-badge badge-optimal">${phenotypeData.phenotype.badge}</span>
             </div>
-            <h2 style="font-size: 1.25rem; font-weight: 700; color: #FFFFFF; margin-bottom: 6px;">
+            <h2 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 6px;">
               ${phenotypeData.phenotype.title}
             </h2>
-            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.4;">
+            <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.45;">
               ${phenotypeData.phenotype.description}
             </p>
-            <div style="background: rgba(0, 0, 0, 0.4); padding: 12px 16px; border-radius: var(--radius-sm); font-size: 0.8125rem; color: #E5E5EA; line-height: 1.45;">
-              <strong style="color: var(--accent-laser-green);">Prescribed Protocol:</strong> ${phenotypeData.phenotype.strategy}
+            <div style="background: #F8FAFC; border: 1px solid var(--border-glass-default); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 0.8125rem; color: var(--text-primary); line-height: 1.45;">
+              <strong style="color: var(--accent-green-hover);">Prescribed Protocol:</strong> ${phenotypeData.phenotype.strategy}
             </div>
           </div>
 
@@ -142,10 +141,10 @@ export class DashboardView {
           <div class="glass-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
               <div>
-                <h3 style="font-size: 1.0625rem; font-weight: 700; color: #FFFFFF;">Smart Scale Bio-impedance Matrix</h3>
-                <span style="font-size: 0.75rem; color: var(--text-secondary);">Validated against age/gender norms</span>
+                <h3 style="font-size: 1.0625rem; font-weight: 700; color: var(--text-primary);">Smart Scale Bio-impedance Matrix</h3>
+                <span style="font-size: 0.75rem; color: var(--text-secondary);">Calibrated against age/gender norms</span>
               </div>
-              <span class="telemetry-badge badge-cyan">TELEMETRY SYNCED</span>
+              <span class="telemetry-badge badge-cyan">BIA SYNCED</span>
             </div>
 
             <div class="biomarker-grid">
@@ -175,7 +174,7 @@ export class DashboardView {
                 <div class="biomarker-desc">${muscleEval.summary}</div>
               </div>
 
-              <!-- Tile 3: Body Fat % -->
+              <!-- Tile 3: Subcutaneous Fat % -->
               <div class="biomarker-card">
                 <div class="biomarker-title">
                   <span>Subcutaneous Fat</span>
@@ -184,15 +183,15 @@ export class DashboardView {
                   ${latestLog.subcutaneous_fat_percent || 20.5}
                   <span class="biomarker-unit">%</span>
                 </div>
-                <div class="biomarker-desc">Peripheral fat stores underneath dermal layers.</div>
+                <div class="biomarker-desc">Peripheral subcutaneous layer fat stores.</div>
               </div>
 
               <!-- Tile 4: BMR -->
               <div class="biomarker-card">
                 <div class="biomarker-title">
-                  <span>Basal Metabolic Rate</span>
+                  <span>Metabolic Rate (BMR)</span>
                 </div>
-                <div class="biomarker-val" style="color: var(--accent-laser-green);">
+                <div class="biomarker-val" style="color: var(--accent-orange);">
                   ${plan ? plan.bmr : 1580}
                   <span class="biomarker-unit">kcal</span>
                 </div>
@@ -220,32 +219,32 @@ export class DashboardView {
               </div>
             </div>
 
-            <span class="telemetry-badge" style="background: rgba(0, 255, 102, 0.1); color: ${compliance.statusColor}; border: 1px solid ${compliance.statusColor};">
+            <span class="telemetry-badge" style="background: var(--accent-green-subtle); color: ${compliance.statusColor}; border: 1px solid ${compliance.statusColor};">
               ${compliance.statusBadge}
             </span>
 
             <!-- Breakdown Factors -->
             <div style="width: 100%; margin-top: 20px; display: flex; flex-direction: column; gap: 8px; text-align: left;">
               <div style="display: flex; justify-content: space-between; font-size: 0.8125rem;">
-                <span style="color: var(--text-secondary);">Calories Match (35% wt):</span>
-                <span style="font-weight: 700; font-family: var(--font-family-telemetry);">${compliance.factors.calorieMatch}%</span>
+                <span style="color: var(--text-secondary);">Calories Target (35% wt):</span>
+                <span style="font-weight: 700; font-family: var(--font-family-telemetry); color: var(--text-primary);">${compliance.factors.calorieMatch}%</span>
               </div>
               <div style="display: flex; justify-content: space-between; font-size: 0.8125rem;">
                 <span style="color: var(--text-secondary);">Protein Floor (35% wt):</span>
-                <span style="font-weight: 700; font-family: var(--font-family-telemetry); color: var(--accent-laser-green);">${compliance.factors.proteinMatch}%</span>
+                <span style="font-weight: 700; font-family: var(--font-family-telemetry); color: var(--accent-green);">${compliance.factors.proteinMatch}%</span>
               </div>
               <div style="display: flex; justify-content: space-between; font-size: 0.8125rem;">
                 <span style="color: var(--text-secondary);">Workout Completion (20% wt):</span>
-                <span style="font-weight: 700; font-family: var(--font-family-telemetry);">${compliance.factors.workoutMatch}%</span>
+                <span style="font-weight: 700; font-family: var(--font-family-telemetry); color: var(--accent-orange);">${compliance.factors.workoutMatch}%</span>
               </div>
               <div style="display: flex; justify-content: space-between; font-size: 0.8125rem;">
                 <span style="color: var(--text-secondary);">Fiber Floor (10% wt):</span>
-                <span style="font-weight: 700; font-family: var(--font-family-telemetry);">${compliance.factors.fiberMatch}%</span>
+                <span style="font-weight: 700; font-family: var(--font-family-telemetry); color: var(--text-primary);">${compliance.factors.fiberMatch}%</span>
               </div>
             </div>
 
             <div style="width: 100%; margin-top: 16px; border-top: 1px solid var(--border-glass-default); padding-top: 12px; font-size: 0.75rem; color: var(--text-secondary); text-align: left;">
-              ${compliance.recommendations[0] || "Maintain adherence to reach target body recomposition."}
+              ${compliance.recommendations[0] || "Follow your personalized recommendations to reach target recomposition."}
             </div>
           </div>
 
@@ -253,19 +252,19 @@ export class DashboardView {
           <div class="glass-card">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
               <span class="form-label">PRESCRIBED DAILY TARGETS</span>
-              <button class="btn-glass btn-sm" id="btn-view-full-plan" style="padding: 4px 10px; font-size: 0.75rem;">View Full Plan</button>
+              <button class="btn-glass btn-sm" id="btn-view-full-plan" style="padding: 4px 10px; font-size: 0.75rem;">View Plan</button>
             </div>
 
             <div style="display: flex; justify-content: space-between; margin-bottom: 14px;">
               <div>
                 <span style="font-size: 0.75rem; color: var(--text-secondary);">CALORIE BUDGET</span>
-                <div style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-family-telemetry); color: #FFFFFF;">
+                <div style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--text-primary);">
                   ${plan ? plan.target_daily_calories : 1850} <span style="font-size: 0.75rem; color: var(--text-secondary);">kcal</span>
                 </div>
               </div>
               <div style="text-align: right;">
                 <span style="font-size: 0.75rem; color: var(--text-secondary);">PROTEIN FLOOR</span>
-                <div style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--accent-laser-green);">
+                <div style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--accent-green);">
                   ${plan ? plan.target_protein_g : 115} <span style="font-size: 0.75rem; color: var(--text-secondary);">g</span>
                 </div>
               </div>
@@ -279,14 +278,14 @@ export class DashboardView {
               </div>
               <div class="macro-legend">
                 <div class="macro-pill"><span class="macro-dot" style="background: var(--telemetry-cyan);"></span> Carbs: ${plan ? plan.target_carbs_g : 210}g</div>
-                <div class="macro-pill"><span class="macro-dot" style="background: var(--accent-laser-green);"></span> Protein: ${plan ? plan.target_protein_g : 115}g</div>
-                <div class="macro-pill"><span class="macro-dot" style="background: var(--telemetry-amber);"></span> Fats: ${plan ? plan.target_fats_g : 58}g</div>
+                <div class="macro-pill"><span class="macro-dot" style="background: var(--accent-green);"></span> Protein: ${plan ? plan.target_protein_g : 115}g</div>
+                <div class="macro-pill"><span class="macro-dot" style="background: var(--accent-orange);"></span> Fats: ${plan ? plan.target_fats_g : 58}g</div>
               </div>
             </div>
 
             <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border-glass-default); display: flex; justify-content: space-between; font-size: 0.8125rem;">
               <span style="color: var(--text-secondary);">Daily Dietary Fiber Goal:</span>
-              <strong style="color: #FFFFFF;">&ge; ${plan ? plan.target_fiber_g : 38} g / day</strong>
+              <strong style="color: var(--text-primary);">&ge; ${plan ? plan.target_fiber_g : 38} g / day</strong>
             </div>
           </div>
 
@@ -295,27 +294,6 @@ export class DashboardView {
     `;
 
     this.attachEvents();
-  }
-
-  renderEmptyState() {
-    this.container.innerHTML = `
-      <div class="glass-card" style="text-align: center; max-width: 600px; margin: 40px auto; padding: 40px;">
-        <div style="width: 64px; height: 64px; margin: 0 auto 20px; background: rgba(0, 255, 102, 0.1); border: 1px solid var(--accent-laser-green); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-laser-green);">
-          <svg width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        </div>
-        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 8px;">No Profile Telemetry Detected</h2>
-        <p style="color: var(--text-secondary); margin-bottom: 24px; font-size: 0.9375rem;">
-          Configure your Indian demographic background and smart scale metrics to calculate your Asian-Indian BMI, metabolic phenotype, and personalized evidence-based plan.
-        </p>
-        <button class="btn-laser" id="btn-start-onboarding">
-          Initialize Profile & Enter Scale Data
-        </button>
-      </div>
-    `;
-
-    document.getElementById("btn-start-onboarding")?.addEventListener("click", () => {
-      this.app.navigateTo("profile");
-    });
   }
 
   attachEvents() {

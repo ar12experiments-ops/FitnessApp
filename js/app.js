@@ -1,10 +1,11 @@
 /**
  * TransformNXT: Application Coordinator & SPA Router
- * Light Minimalist Glass Theme & Onboarding Gating Architecture
+ * Payrix-Inspired Liquid Glass Theme — Welcome Landing → Parameters → Full Dashboard Flow
  */
 
 import { dbService } from "./storage/db.js";
 
+import { LandingView } from "./views/landing-view.js";
 import { OnboardingView } from "./views/onboarding-view.js";
 import { ProfileView } from "./views/profile-view.js";
 import { DashboardView } from "./views/dashboard-view.js";
@@ -15,8 +16,11 @@ import { AnalyticsView } from "./views/analytics-view.js";
 
 class TransformNXTApp {
   constructor() {
-    this.currentView = "dashboard";
+    this.currentView = "landing";
+    this.appShell = document.getElementById("app-shell");
+
     this.views = {
+      landing: new LandingView(this),
       onboarding: new OnboardingView(this),
       dashboard: new DashboardView(this),
       plan: new PlanView(this),
@@ -28,20 +32,51 @@ class TransformNXTApp {
   }
 
   async init() {
-    // Setup Navigation Listeners
+    // Setup Navigation and Header Listeners
     this.setupNavigation();
 
-    // Check if user profile already exists
-    const user = await dbService.getCurrentUser();
-    if (!user) {
-      // Gating: Must complete onboarding first
-      this.lockNavigationForOnboarding(true);
-      await this.navigateTo("onboarding");
-    } else {
-      this.lockNavigationForOnboarding(false);
-      await this.updateHeaderUser();
-      await this.navigateTo("dashboard");
+    // The landing page upon opening the link should always be the welcome page with "Let's Transform"
+    this.showLanding();
+  }
+
+  /** Show the full-screen landing welcome page, hide app shell */
+  showLanding() {
+    this.currentView = "landing";
+    this.appShell.style.display = "none";
+    const mobileNav = document.getElementById("mobile-navbar");
+    if (mobileNav) mobileNav.style.display = "none";
+
+    // Hide any other active view sections
+    document.querySelectorAll(".view-section").forEach(sec => {
+      sec.classList.remove("active");
+    });
+
+    const landingSec = document.getElementById("view-landing");
+    if (landingSec) {
+      landingSec.classList.add("active");
+      landingSec.style.display = "block";
     }
+
+    this.views.landing.render();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  /** Transition from landing to parameters intake page */
+  startOnboarding() {
+    const landingSec = document.getElementById("view-landing");
+    if (landingSec) {
+      landingSec.style.display = "none";
+      landingSec.classList.remove("active");
+    }
+
+    this.showAppShell();
+    this.lockNavigationForOnboarding(true);
+    this.navigateTo("onboarding");
+  }
+
+  /** Show the main app shell (header + nav + views) */
+  showAppShell() {
+    this.appShell.style.display = "flex";
   }
 
   lockNavigationForOnboarding(isLocked) {
@@ -61,6 +96,11 @@ class TransformNXTApp {
   }
 
   setupNavigation() {
+    // Brand header click -> Return to Landing Welcome page
+    document.getElementById("main-header-brand")?.addEventListener("click", () => {
+      this.showLanding();
+    });
+
     // Desktop navigation links
     document.querySelectorAll(".desktop-nav .nav-link").forEach(link => {
       link.addEventListener("click", (e) => {

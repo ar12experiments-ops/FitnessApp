@@ -38,10 +38,10 @@ export class ProfileView {
         <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
           <div>
             <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
-              <span class="telemetry-badge badge-optimal">PROFILE & TELEMETRY</span>
+              <span class="telemetry-badge badge-optimal">YOUR PROFILE</span>
               <span class="brand-tag">ASIAN-INDIAN STANDARDS</span>
             </div>
-            <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Individual Profile & Smart Scale Ingestion</h1>
+            <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Your Profile & Body Metrics</h1>
           </div>
           <button class="btn-orange btn-sm" id="btn-reset-onboarding">
             Rerun Onboarding Wizard
@@ -89,10 +89,10 @@ export class ProfileView {
               <div class="form-group">
                 <label class="form-label" for="prof-region">Regional Cuisine Style</label>
                 <select class="form-select" id="prof-region">
-                  <option value="north" ${region === "north" ? "selected" : ""}>North Indian (Roti, Dals, Paneer, Sabzis)</option>
-                  <option value="south" ${region === "south" ? "selected" : ""}>South Indian (Idli, Sambar, Millets, Fish)</option>
-                  <option value="west" ${region === "west" ? "selected" : ""}>West Indian (Jowar/Bajra, Sprouts, Poha)</option>
-                  <option value="east" ${region === "east" ? "selected" : ""}>East Indian (Rice, Sattu, Fish, Greens)</option>
+                  <option value="north" ${region === "north" ? "selected" : ""}>North Indian Cuisine (Wheat-based, Legumes, Dairy)</option>
+                  <option value="south" ${region === "south" ? "selected" : ""}>South Indian Cuisine (Rice-based, Millets, Lentils)</option>
+                  <option value="west" ${region === "west" ? "selected" : ""}>West Indian Cuisine (Millet-based, Sprouts, Peanuts)</option>
+                  <option value="east" ${region === "east" ? "selected" : ""}>East Indian Cuisine (Rice-based, Fish, Leafy Greens)</option>
                 </select>
               </div>
 
@@ -154,14 +154,14 @@ export class ProfileView {
             </div>
 
             <div class="clinical-notice" style="margin-top: 20px;">
-              <strong>Clinical Guardrail (Zero-Hallucination):</strong> All calculations are processed locally with zero cloud hallucination. Your data is tested against the WHO Asian-Indian BMI classification (normal threshold 18.5 - 22.9 kg/m²) and ICMR-NIN energy expenditure guidelines.
+              <strong>Evidence-Based Assurance:</strong> All calculations are processed locally. Your data is tested against the WHO Asian-Indian BMI classification (normal threshold 18.5 - 22.9 kg/m²) and ICMR-NIN energy expenditure guidelines.
             </div>
           </div>
 
           <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
             <button type="submit" class="btn-green" style="padding: 14px 32px; font-size: 1rem;">
               <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
-              Recalculate & Sync Telemetry
+              Recalculate & Update Plan
             </button>
           </div>
         </form>
@@ -271,7 +271,7 @@ export class ProfileView {
       };
       await dbService.saveWeeklyPlan(weeklyPlan);
 
-      this.app.showNotification("Telemetry updated & new plan generated!");
+      this.app.showNotification("Profile updated & new plan generated!");
       await this.app.updateHeaderUser();
       this.app.navigateTo("dashboard");
     });

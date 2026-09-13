@@ -1,5 +1,5 @@
 /* ==========================================================================
-   TransformNXT: Layout & Responsive Structure (Light Minimalist Glass Theme)
+   TransformNXT: Layout & Responsive Structure — Dark Liquid Glass Theme
    ========================================================================== */
 
 /* Main Layout Grid */
@@ -9,17 +9,17 @@
   min-height: 100vh;
   max-width: 1360px;
   margin: 0 auto;
-  padding: 0 16px 80px 16px;
+  padding: 0 20px 80px 20px;
   position: relative;
   z-index: 1;
 }
 
-/* HUD Top Header */
+/* ─── HUD Top Header ─── */
 .hud-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 0;
+  padding: 18px 0;
   border-bottom: 1px solid var(--border-glass-default);
   margin-bottom: 24px;
 }
@@ -28,29 +28,37 @@
   display: flex;
   align-items: center;
   gap: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.brand-wrap:hover .brand-logo-icon {
+  transform: scale(1.05);
+  border-color: var(--accent-green);
+  box-shadow: 0 0 20px var(--accent-green-glow);
 }
 
 .brand-logo-icon {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   background: var(--accent-green-subtle);
-  border: 1px solid var(--accent-green);
+  border: 1px solid rgba(16, 185, 129, 0.25);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
   color: var(--accent-green);
-  box-shadow: 0 2px 8px var(--accent-green-glow);
+  box-shadow: 0 0 16px var(--accent-green-glow);
 }
 
 .brand-title {
-  font-size: 1.375rem;
+  font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: var(--text-primary);
   display: flex;
   align-items: baseline;
-  gap: 4px;
+  gap: 3px;
 }
 
 .brand-title span {
@@ -58,15 +66,15 @@
 }
 
 .brand-tag {
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   color: var(--text-secondary);
-  font-family: var(--font-family-telemetry);
+  font-family: var(--font-family-data);
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
 }
 
-/* Header Telemetry Status */
+/* ─── Header Status Tray ─── */
 .hud-status-tray {
   display: flex;
   align-items: center;
@@ -77,45 +85,45 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-glass-default);
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   color: var(--text-primary);
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(8px);
   transition: all 0.2s ease;
 }
 
 .profile-pill:hover {
   border-color: var(--accent-green);
-  box-shadow: 0 0 10px var(--accent-green-glow);
+  box-shadow: 0 0 12px var(--accent-green-glow);
+  background: rgba(16, 185, 129, 0.06);
 }
 
-/* Desktop Navigation Bar with Green & Orange Accents */
+/* ─── Desktop Navigation Bar ─── */
 .desktop-nav {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.75);
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: var(--glass-blur-default);
-  padding: 4px 6px;
+  padding: 4px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-glass-default);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
 }
 
 .nav-link {
   display: flex;
   align-items: center;
   gap: 6px;
-  padding: 8px 16px;
+  padding: 7px 14px;
   border-radius: var(--radius-full);
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   font-weight: 600;
   transition: all 0.2s ease;
   border: 1px solid transparent;
@@ -124,27 +132,28 @@
 
 .nav-link:hover {
   color: var(--text-primary);
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .nav-link.active {
   color: var(--accent-green-hover);
-  background: #FFFFFF;
-  border-color: var(--accent-green);
-  box-shadow: 0 2px 8px var(--accent-green-glow);
+  background: rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.20);
+  box-shadow: 0 0 12px var(--accent-green-glow);
 }
 
-/* Special styling for Chatbot tab with orange accent */
+/* Chatbot tab with orange accent */
 .nav-link[data-view="chatbot"].active {
   color: var(--accent-orange-hover);
-  border-color: var(--accent-orange);
-  box-shadow: 0 2px 8px var(--accent-orange-glow);
+  background: rgba(249, 115, 22, 0.08);
+  border-color: rgba(249, 115, 22, 0.20);
+  box-shadow: 0 0 12px var(--accent-orange-glow);
 }
 
-/* Views Container */
+/* ─── Views Container ─── */
 .view-section {
   display: none;
-  animation: viewFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: viewFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .view-section.active {
@@ -152,17 +161,11 @@
 }
 
 @keyframes viewFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(6px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
-/* Grid Layouts */
+/* ─── Grid Layouts ─── */
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -181,21 +184,21 @@
   gap: 20px;
 }
 
-/* Sticky Bottom Mobile Glass Navigation */
+/* ─── Sticky Bottom Mobile Navigation ─── */
 .mobile-nav {
   display: none;
   position: fixed;
   bottom: 12px;
   left: 16px;
   right: 16px;
-  background: rgba(255, 255, 255, 0.92);
+  background: rgba(13, 18, 36, 0.85);
   backdrop-filter: var(--glass-blur-heavy);
   -webkit-backdrop-filter: var(--glass-blur-heavy);
   border: 1px solid var(--border-glass-default);
   border-radius: var(--radius-full);
   padding: 8px 12px;
   z-index: 100;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.40);
   justify-content: space-around;
 }
 
@@ -203,11 +206,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  gap: 3px;
   background: transparent;
   border: none;
   color: var(--text-secondary);
-  font-size: 0.6875rem;
+  font-size: 0.625rem;
   font-weight: 600;
   cursor: pointer;
   padding: 6px 12px;
@@ -230,7 +233,7 @@
   height: 20px;
 }
 
-/* Responsive Media Queries */
+/* ─── Responsive Breakpoints ─── */
 @media (max-width: 1024px) {
   .dashboard-grid, .plan-grid, .tracking-grid {
     grid-template-columns: 1fr;

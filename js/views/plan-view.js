@@ -73,7 +73,7 @@ export class PlanView {
             <span class="telemetry-badge badge-orange">~${currentMealDay ? currentMealDay.dayCalories : 0} kcal</span>
           </div>
 
-          <div style="display: flex; gap: 12px; margin-bottom: 16px; font-size: 0.8125rem; color: var(--text-secondary); font-family: var(--font-family-telemetry);">
+          <div style="display: flex; gap: 12px; margin-bottom: 16px; font-size: 0.8125rem; color: var(--text-secondary); font-family: var(--font-family-data);">
             <span>Est. Protein: <strong style="color: var(--accent-green);">${currentMealDay ? currentMealDay.dayProteinG : 0}g</strong></span>
             <span>&bull;</span>
             <span>Est. Fiber: <strong style="color: var(--telemetry-cyan);">${currentMealDay ? currentMealDay.dayFiberG : 0}g</strong></span>
@@ -85,7 +85,7 @@ export class PlanView {
               <div style="background: #FFFFFF; border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                 <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
                   <h3 style="font-size: 0.9375rem; font-weight: 700; color: var(--text-primary);">${slot.mealSlot}</h3>
-                  <span style="font-size: 0.75rem; color: var(--text-secondary); font-family: var(--font-family-telemetry);">${slot.time}</span>
+                  <span style="font-size: 0.75rem; color: var(--text-secondary); font-family: var(--font-family-data);">${slot.time}</span>
                 </div>
                 
                 <div style="display: flex; flex-direction: column; gap: 6px;">
@@ -95,7 +95,7 @@ export class PlanView {
                         <strong style="color: var(--text-primary);">${it.name}</strong>
                         <span style="color: var(--text-secondary); margin-left: 6px;">(${it.portion})</span>
                       </div>
-                      <div style="color: var(--accent-green); font-family: var(--font-family-telemetry); font-weight: 600;">
+                      <div style="color: var(--accent-green); font-family: var(--font-family-data); font-weight: 600;">
                         ${it.cals} kcal &bull; ${it.protein}g P
                       </div>
                     </div>
@@ -126,7 +126,7 @@ export class PlanView {
               </div>
               <div style="text-align: right;">
                 <span style="font-size: 0.6875rem; color: var(--text-secondary);">MET CALORIE BURN</span>
-                <div style="font-size: 1.125rem; font-weight: 800; color: var(--accent-green-hover); font-family: var(--font-family-telemetry);">
+                <div style="font-size: 1.125rem; font-weight: 800; color: var(--accent-green-hover); font-family: var(--font-family-data);">
                   ~${currentWorkoutDay ? currentWorkoutDay.estimatedCaloriesBurned : 0} kcal
                 </div>
               </div>

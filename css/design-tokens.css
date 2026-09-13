@@ -1,65 +1,70 @@
 /* ==========================================================================
-   TransformNXT Design Tokens: Light Minimalist Glass Theme
-   Crisp White Canvas (#FAFAFA), Frosted Floating Glass, Emerald Green & Sunset Orange Accents
+   TransformNXT Design Tokens: Payrix Liquid Glass Theme
+   Inspired by Payrix SaaS Web Finance Dashboard (liquidglassdesign.com)
+   Deep obsidian/navy canvas, luminous organic mesh orbs, frosted liquid glass
+   surfaces with specular top-edge gloss, Emerald Green & Sunset Orange glows.
    ========================================================================== */
 
 :root {
-  /* Canvas & Light Void Base */
-  --bg-void: #F8FAFC;              /* Clean soft white-slate canvas */
-  --bg-space: #FFFFFF;             /* Pure white background */
-  --bg-surface-glass: rgba(255, 255, 255, 0.78);     /* Translucent floating glass tile */
-  --bg-surface-glass-hover: rgba(255, 255, 255, 0.92);/* Hover glass state */
-  --bg-surface-elevated: #FFFFFF;                     /* Popovers, modals */
-  --bg-input-glass: rgba(241, 245, 249, 0.75);        /* Soft input background */
+  /* Canvas & Deep Obsidian Base */
+  --bg-void: #070A14;              /* Deep space obsidian */
+  --bg-space: #0B1024;             /* Elevated dark navy */
+  --bg-surface-glass: rgba(255, 255, 255, 0.038);      /* Liquid frosted glass */
+  --bg-surface-glass-hover: rgba(255, 255, 255, 0.065);/* Active hover glass */
+  --bg-surface-elevated: rgba(14, 20, 42, 0.94);       /* Popovers, modals */
+  --bg-input-glass: rgba(255, 255, 255, 0.05);          /* Translucent input base */
+  --bg-glass-specular: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.015) 100%);
 
-  /* Signature Accents: Vibrant Green & Warm Sunset Orange */
-  --accent-green: #10B981;          /* Emerald Green (Optimal health, protein, primary CTA) */
-  --accent-green-hover: #059669;
-  --accent-green-glow: rgba(16, 185, 129, 0.25);
+  /* Signature Accents: Vibrant Cyber Green & Radiant Sunset Orange */
+  --accent-green: #10B981;          /* Emerald / Cyber Green */
+  --accent-green-hover: #34D399;
+  --accent-green-glow: rgba(16, 185, 129, 0.28);
   --accent-green-subtle: rgba(16, 185, 129, 0.12);
+  --accent-green-gradient: linear-gradient(135deg, #10B981 0%, #059669 100%);
 
-  --accent-orange: #F97316;         /* Sunset Orange (Workouts, energy, secondary CTA) */
-  --accent-orange-hover: #EA580C;
-  --accent-orange-glow: rgba(249, 115, 22, 0.25);
+  --accent-orange: #F97316;         /* Sunset Orange */
+  --accent-orange-hover: #FB923C;
+  --accent-orange-glow: rgba(249, 115, 22, 0.28);
   --accent-orange-subtle: rgba(249, 115, 22, 0.12);
+  --accent-orange-gradient: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
 
-  /* Telemetry Status Spectrum (Light Adapted) */
+  /* Telemetry Status Spectrum */
   --telemetry-optimal: #10B981;     /* Emerald Green */
-  --telemetry-cyan: #0284C7;        /* Deep Sky Cyan */
-  --telemetry-amber: #D97706;       /* Warm Amber */
-  --telemetry-crimson: #EF4444;     /* Crisp Red */
-  --telemetry-purple: #8B5CF6;      /* Vibrant Purple */
+  --telemetry-cyan: #22D3EE;        /* Luminous Cyan */
+  --telemetry-amber: #FBBF24;       /* Warm Amber */
+  --telemetry-crimson: #F87171;     /* Soft Risk Red */
+  --telemetry-purple: #A78BFA;      /* Radiant Purple */
 
-  /* Text & Contrast Hierarchy (Dark on Light) */
-  --text-primary: #0F172A;          /* Deep Slate (Headers, primary data) */
-  --text-secondary: #475569;        /* Medium Slate (Labels, descriptions) */
-  --text-muted: #94A3B8;            /* Soft Muted Grey (Units, timestamps) */
+  /* Text & Contrast Hierarchy (Light on Obsidian) */
+  --text-primary: rgba(255, 255, 255, 0.96);     /* Ultra-crisp white */
+  --text-secondary: rgba(255, 255, 255, 0.62);   /* Smooth secondary label */
+  --text-muted: rgba(255, 255, 255, 0.35);        /* Subtle timestamps */
 
-  /* Structural Hairlines & Borders */
-  --border-glass-default: rgba(15, 23, 42, 0.08);
-  --border-glass-hover: rgba(15, 23, 42, 0.16);
+  /* Structural Hairlines & Specular Glass Perimeters */
+  --border-glass-default: rgba(255, 255, 255, 0.09);
+  --border-glass-hover: rgba(255, 255, 255, 0.18);
   --border-glass-green: rgba(16, 185, 129, 0.35);
   --border-glass-orange: rgba(249, 115, 22, 0.35);
-  --border-glass-risk: rgba(239, 68, 68, 0.35);
+  --border-glass-risk: rgba(248, 113, 113, 0.35);
 
-  /* Shadows for Floating Glass Tiles */
-  --shadow-glass-depth: 0 10px 25px -5px rgba(15, 23, 42, 0.05), 0 8px 10px -6px rgba(15, 23, 42, 0.03);
-  --shadow-glass-hover: 0 20px 30px -10px rgba(15, 23, 42, 0.08), 0 0 18px rgba(16, 185, 129, 0.15);
-  --shadow-orange-glow: 0 0 20px rgba(249, 115, 22, 0.2);
-  --shadow-green-glow: 0 0 20px rgba(16, 185, 129, 0.2);
+  /* Shadows for Floating Liquid Glass Tiles with Specular Rim Reflections */
+  --shadow-glass-depth: 0 16px 40px -8px rgba(0, 0, 0, 0.45), inset 0 1px 1px 0 rgba(255, 255, 255, 0.18), inset 0 0 20px 0 rgba(255, 255, 255, 0.02);
+  --shadow-glass-hover: 0 24px 50px -6px rgba(0, 0, 0, 0.55), 0 0 24px rgba(16, 185, 129, 0.12), inset 0 1px 2px 0 rgba(255, 255, 255, 0.25);
+  --shadow-orange-glow: 0 0 28px rgba(249, 115, 22, 0.22);
+  --shadow-green-glow: 0 0 28px rgba(16, 185, 129, 0.22);
 
-  /* Radii */
-  --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 18px;
-  --radius-lg: 24px;
+  /* Radii (Modern Payrix rounded card aesthetic) */
+  --radius-xs: 8px;
+  --radius-sm: 14px;
+  --radius-md: 22px;
+  --radius-lg: 30px;
   --radius-full: 9999px;
 
   /* Blur Filters */
-  --glass-blur-default: blur(16px);
-  --glass-blur-heavy: blur(24px);
+  --glass-blur-default: blur(24px) saturate(180%);
+  --glass-blur-heavy: blur(36px) saturate(200%);
 
   /* Typography */
   --font-family-ui: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-family-telemetry: "Space Grotesk", "JetBrains Mono", monospace;
+  --font-family-data: "Space Grotesk", "JetBrains Mono", monospace;
 }

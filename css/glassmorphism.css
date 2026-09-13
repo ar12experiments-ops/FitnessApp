@@ -1,6 +1,7 @@
 /* ==========================================================================
-   TransformNXT: Light Minimalist Glassmorphism Architecture
-   White backgrounds, floating glass tiles, delicate hairlines & soft shadows
+   TransformNXT: Payrix Liquid Glass Architecture
+   Luminous ambient organic lighting, ultra-deep frosted glass cards,
+   specular reflections, and tactile micro-interactions.
    ========================================================================== */
 
 /* Universal Reset & Base Styles */
@@ -22,43 +23,89 @@ body {
   position: relative;
 }
 
-/* Floating Ambient Lighting Meshes (Subtle Green & Orange) */
+/* ─── Animated Gradient Mesh Blobs (Payrix Ambient Glow) ─── */
 body::before {
   content: "";
   position: fixed;
-  top: -120px;
-  right: -120px;
-  width: 550px;
-  height: 550px;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.09) 0%, rgba(248, 250, 252, 0) 70%);
+  top: -180px;
+  right: -150px;
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, rgba(34, 211, 238, 0.08) 35%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  animation: meshFloat1 20s ease-in-out infinite alternate;
 }
 
 body::after {
   content: "";
   position: fixed;
-  bottom: -120px;
-  left: -120px;
-  width: 500px;
-  height: 500px;
-  background: radial-gradient(circle, rgba(249, 115, 22, 0.08) 0%, rgba(248, 250, 252, 0) 70%);
+  bottom: -180px;
+  left: -150px;
+  width: 700px;
+  height: 700px;
+  background: radial-gradient(circle, rgba(249, 115, 22, 0.14) 0%, rgba(167, 139, 250, 0.07) 35%, transparent 70%);
   pointer-events: none;
   z-index: 0;
+  animation: meshFloat2 24s ease-in-out infinite alternate;
 }
 
-/* Floating Glass Card */
+@keyframes meshFloat1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, 40px) scale(1.08); }
+  100% { transform: translate(30px, -25px) scale(0.95); }
+}
+
+@keyframes meshFloat2 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -35px) scale(1.06); }
+  100% { transform: translate(-30px, 25px) scale(0.96); }
+}
+
+/* Center atmospheric ambient glow */
+.app-container::before {
+  content: "";
+  position: fixed;
+  top: 35%;
+  left: 25%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.06) 0%, rgba(34, 211, 238, 0.04) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+  animation: meshFloat3 28s ease-in-out infinite alternate;
+}
+
+@keyframes meshFloat3 {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(40px, -30px); }
+}
+
+/* ─── Floating Liquid Glass Card (Payrix Specular Glass) ─── */
 .glass-card {
   background: var(--bg-surface-glass);
+  background-image: var(--bg-glass-specular);
   backdrop-filter: var(--glass-blur-default);
   -webkit-backdrop-filter: var(--glass-blur-default);
   border: 1px solid var(--border-glass-default);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-glass-depth);
-  padding: 24px;
+  padding: 26px;
   position: relative;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+}
+
+/* Specular light catch on the top edge */
+.glass-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.22) 30%, rgba(255, 255, 255, 0.35) 50%, rgba(255, 255, 255, 0.22) 70%, transparent 100%);
+  pointer-events: none;
 }
 
 .glass-card:hover {
@@ -70,78 +117,80 @@ body::after {
 
 .glass-card-interactive {
   cursor: pointer;
-}
-
-.glass-card-interactive::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: transparent;
-  transition: background 0.2s ease;
-}
-
-.glass-card-interactive.active::before,
-.glass-card-interactive:hover::before {
-  background: var(--accent-green);
-}
-
-/* Modals & Dialogs */
-.glass-modal {
-  background: #FFFFFF;
   border: 1px solid var(--border-glass-default);
-  border-radius: var(--radius-lg);
-  box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.15);
 }
 
-/* Telemetry Badges & Status Pills */
+.glass-card-interactive:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 0 0 15px rgba(16, 185, 129, 0.08);
+}
+
+.glass-card-interactive.active {
+  border-color: var(--accent-green);
+  background: rgba(16, 185, 129, 0.08);
+  box-shadow: 0 0 24px var(--accent-green-glow);
+}
+
+/* ─── Modals & Elevated Panels ─── */
+.glass-modal {
+  background: var(--bg-surface-elevated);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border: 1px solid var(--border-glass-hover);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.55), inset 0 1px 1px rgba(255, 255, 255, 0.2);
+}
+
+/* ─── Status Badges ─── */
 .telemetry-badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 10px;
+  padding: 5px 12px;
   border-radius: var(--radius-full);
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 700;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  font-family: var(--font-family-telemetry);
+  font-family: var(--font-family-data);
   white-space: nowrap;
+  backdrop-filter: blur(8px);
 }
 
 .badge-optimal {
   background: var(--accent-green-subtle);
   color: var(--accent-green-hover);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  border: 1px solid rgba(16, 185, 129, 0.30);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.10);
 }
 
 .badge-orange {
   background: var(--accent-orange-subtle);
   color: var(--accent-orange-hover);
-  border: 1px solid rgba(249, 115, 22, 0.3);
+  border: 1px solid rgba(249, 115, 22, 0.30);
+  box-shadow: 0 0 12px rgba(249, 115, 22, 0.10);
 }
 
 .badge-cyan {
-  background: rgba(2, 132, 199, 0.08);
+  background: rgba(34, 211, 238, 0.10);
   color: var(--telemetry-cyan);
-  border: 1px solid rgba(2, 132, 199, 0.25);
+  border: 1px solid rgba(34, 211, 238, 0.25);
 }
 
 .badge-warning {
-  background: rgba(217, 119, 6, 0.08);
+  background: rgba(251, 191, 36, 0.10);
   color: var(--telemetry-amber);
-  border: 1px solid rgba(217, 119, 6, 0.25);
+  border: 1px solid rgba(251, 191, 36, 0.25);
 }
 
 .badge-risk {
-  background: rgba(239, 68, 68, 0.08);
+  background: rgba(248, 113, 113, 0.10);
   color: var(--telemetry-crimson);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  border: 1px solid rgba(248, 113, 113, 0.30);
+  box-shadow: 0 0 12px rgba(248, 113, 113, 0.15);
 }
 
-/* Pulsing Status Beacons */
+/* ─── Pulsing Status Beacons ─── */
 @keyframes beacon-green-pulse {
   0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.6); }
   70% { box-shadow: 0 0 0 8px rgba(16, 185, 129, 0); }

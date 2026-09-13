@@ -26,7 +26,7 @@ export class AnalyticsView {
       <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
         <div>
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
-            <span class="telemetry-badge badge-optimal">LONGITUDINAL TELEMETRY</span>
+            <span class="telemetry-badge badge-optimal">PROGRESS HISTORY</span>
             <span class="brand-tag">PROGRESS ANALYTICS</span>
           </div>
           <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Health Metrics & Compliance History</h1>
@@ -59,12 +59,12 @@ export class AnalyticsView {
           ` : `
             <div style="display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto;">
               ${healthLogs.map(l => `
-                <div style="background: #FFFFFF; border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <strong style="color: var(--text-primary); font-size: 0.9375rem;">${new Date(l.timestamp).toLocaleDateString()}</strong>
                     <span class="telemetry-badge badge-optimal">${l.bmi_calculated} BMI</span>
                   </div>
-                  <div style="display: flex; gap: 14px; font-size: 0.8125rem; color: var(--text-secondary); font-family: var(--font-family-telemetry);">
+                  <div style="display: flex; gap: 14px; font-size: 0.8125rem; color: var(--text-secondary); font-family: var(--font-family-data);">
                     <span>Weight: <strong style="color: var(--text-primary);">${l.weight_kg} kg</strong></span>
                     <span>Visceral Fat: <strong style="color: ${l.visceral_fat_rating > 13 ? 'var(--telemetry-crimson)' : 'var(--accent-green)'};">${l.visceral_fat_rating}</strong></span>
                     <span>Muscle: <strong style="color: var(--accent-green);">${l.muscle_mass_kg} kg</strong></span>
@@ -87,14 +87,14 @@ export class AnalyticsView {
           ` : `
             <div style="display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto;">
               ${trackingLogs.map(t => `
-                <div style="background: #FFFFFF; border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02);">
                   <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <strong style="color: var(--text-primary); font-size: 0.9375rem;">${t.date}</strong>
                     <span class="telemetry-badge ${t.compliance_score_percent >= 80 ? 'badge-optimal' : 'badge-orange'}">
                       ${t.compliance_score_percent}% Match
                     </span>
                   </div>
-                  <div style="display: flex; gap: 14px; font-size: 0.8125rem; color: var(--text-secondary); font-family: var(--font-family-telemetry);">
+                  <div style="display: flex; gap: 14px; font-size: 0.8125rem; color: var(--text-secondary); font-family: var(--font-family-data);">
                     <span>Cals: <strong style="color: var(--text-primary);">${t.calories_consumed}</strong></span>
                     <span>Protein: <strong style="color: var(--accent-green);">${t.protein_consumed}g</strong></span>
                     <span>Exercises: <strong style="color: var(--telemetry-cyan);">${t.exercises_completed ? t.exercises_completed.length : 0} done</strong></span>
@@ -121,7 +121,7 @@ export class AnalyticsView {
       a.download = `TransformNXT_Backup_${new Date().toISOString().split("T")[0]}.json`;
       a.click();
       URL.revokeObjectURL(url);
-      this.app.showNotification("Encrypted telemetry backup downloaded!");
+      this.app.showNotification("Backup downloaded successfully!");
     });
 
     const fileInput = document.getElementById("file-import-backup");
@@ -133,7 +133,7 @@ export class AnalyticsView {
       reader.onload = async (event) => {
         try {
           await dbService.importBackup(event.target.result);
-          this.app.showNotification("Backup imported! Reloading telemetry...");
+          this.app.showNotification("Backup imported! Reloading data...");
           await this.render();
           this.app.updateHeaderUser();
         } catch (err) {

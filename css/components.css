@@ -1,10 +1,10 @@
 /* ==========================================================================
-   TransformNXT: Component UI System (Light Minimalist Glass Theme)
-   Green & Orange Accents, High-Contrast Typography, Frosted Floating Tiles
+   TransformNXT: Component UI System — Dark Liquid Glass Theme
+   Green & Orange Accent Glows, Frosted Floating Tiles, Dark Canvas
    ========================================================================== */
 
-/* Buttons */
-.btn-laser, .btn-green {
+/* ─── Buttons ─── */
+.btn-green {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -13,19 +13,19 @@
   color: #FFFFFF;
   font-family: var(--font-family-ui);
   font-weight: 700;
-  font-size: 0.9375rem;
-  padding: 12px 24px;
+  font-size: 0.875rem;
+  padding: 10px 22px;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 14px var(--accent-green-glow);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px var(--accent-green-glow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
 }
 
-.btn-laser:hover, .btn-green:hover {
+.btn-green:hover {
   background: var(--accent-green-hover);
-  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.35);
   transform: translateY(-1px);
 }
 
@@ -38,19 +38,19 @@
   color: #FFFFFF;
   font-family: var(--font-family-ui);
   font-weight: 700;
-  font-size: 0.9375rem;
-  padding: 12px 24px;
+  font-size: 0.875rem;
+  padding: 10px 22px;
   border-radius: var(--radius-sm);
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 14px var(--accent-orange-glow);
-  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 16px var(--accent-orange-glow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
 }
 
 .btn-orange:hover {
   background: var(--accent-orange-hover);
-  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.4);
+  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.35);
   transform: translateY(-1px);
 }
 
@@ -59,16 +59,16 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.05);
   color: var(--text-primary);
   font-family: var(--font-family-ui);
   font-weight: 600;
-  font-size: 0.875rem;
-  padding: 10px 18px;
+  font-size: 0.8125rem;
+  padding: 8px 16px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-glass-default);
   cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(8px);
   transition: all 0.2s ease;
   text-decoration: none;
 }
@@ -76,15 +76,16 @@
 .btn-glass:hover {
   border-color: var(--accent-green);
   color: var(--accent-green-hover);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.15);
+  background: rgba(16, 185, 129, 0.06);
+  box-shadow: 0 0 16px rgba(16, 185, 129, 0.10);
 }
 
 .btn-sm {
   padding: 6px 14px;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
 }
 
-/* Form Inputs & Controls */
+/* ─── Form Inputs & Controls ─── */
 .form-group {
   margin-bottom: 16px;
   display: flex;
@@ -93,34 +94,97 @@
 }
 
 .form-label {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 700;
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  font-family: var(--font-family-telemetry);
+  font-family: var(--font-family-data);
 }
 
 .form-input, .form-select {
-  background: #FFFFFF;
-  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-glass-default);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-family: var(--font-family-ui);
-  font-size: 0.9375rem;
-  padding: 12px 16px;
+  font-size: 0.875rem;
+  padding: 11px 14px;
   outline: none;
   transition: all 0.2s ease;
   width: 100%;
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+  backdrop-filter: blur(8px);
+}
+
+.form-input::placeholder {
+  color: var(--text-muted);
 }
 
 .form-input:focus, .form-select:focus {
   border-color: var(--accent-green);
-  box-shadow: 0 0 0 3px var(--accent-green-subtle);
+  box-shadow: 0 0 0 3px var(--accent-green-subtle), 0 0 16px var(--accent-green-glow);
+  background: rgba(255, 255, 255, 0.06);
 }
 
-/* Asian-Indian BMI Spectrum Gauge Bar (Light Theme) */
+.form-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+.form-select option {
+  background: #141929;
+  color: var(--text-primary);
+}
+
+/* ─── Sex Toggle & Dietary Card Pills ─── */
+.ob-sex-toggle {
+  transition: all 0.25s ease;
+  border-radius: var(--radius-sm);
+}
+
+.ob-sex-toggle.active-sex {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--accent-green);
+  color: var(--accent-green-hover);
+  box-shadow: 0 0 16px var(--accent-green-glow);
+}
+
+.diet-card-pill {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--border-glass-default);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  backdrop-filter: blur(8px);
+}
+
+.diet-card-pill:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.diet-card-pill.active-diet {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: var(--accent-green);
+  box-shadow: 0 0 20px var(--accent-green-glow);
+  transform: translateY(-2px);
+}
+
+.diet-card-pill.active-diet strong {
+  color: var(--accent-green-hover);
+}
+
+/* ─── Asian-Indian BMI Spectrum Gauge ─── */
 .bmi-spectrum-container {
   margin-top: 15px;
   display: flex;
@@ -130,41 +194,41 @@
 
 .bmi-track {
   position: relative;
-  height: 12px;
+  height: 10px;
   border-radius: var(--radius-full);
   background: linear-gradient(
     to right,
-    #0284C7 0%,    /* Underweight: <18.5 */
-    #0284C7 25%,
+    #22D3EE 0%,    /* Underweight: <18.5 */
+    #22D3EE 25%,
     #10B981 25%,   /* Normal: 18.5 - 22.9 */
     #10B981 50%,
-    #F97316 50%,   /* Overweight (Indian Cutoff): 23.0 - 24.9 */
-    #F97316 65%,
-    #EF4444 65%,   /* Obese: >=25.0 */
-    #EF4444 100%
+    #FBBF24 50%,   /* Overweight: 23.0 - 24.9 */
+    #FBBF24 65%,
+    #F87171 65%,   /* Obese: >=25.0 */
+    #F87171 100%
   );
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.10);
 }
 
 .bmi-pointer {
   position: absolute;
-  top: -6px;
+  top: -7px;
   width: 24px;
   height: 24px;
-  background: #FFFFFF;
-  border: 3px solid #0F172A;
+  background: var(--bg-void);
+  border: 3px solid rgba(255, 255, 255, 0.85);
   border-radius: 50%;
   transform: translateX(-50%);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.20);
   transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .bmi-labels {
   display: flex;
   justify-content: space-between;
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   color: var(--text-secondary);
-  font-family: var(--font-family-telemetry);
+  font-family: var(--font-family-data);
 }
 
 .bmi-labels span {
@@ -173,7 +237,7 @@
   align-items: center;
 }
 
-/* Circular SVG Adherence Ring (Light Theme) */
+/* ─── Circular Adherence Ring ─── */
 .compliance-ring-container {
   display: flex;
   flex-direction: column;
@@ -190,7 +254,7 @@
 
 .compliance-bg {
   fill: none;
-  stroke: #E2E8F0;
+  stroke: rgba(255, 255, 255, 0.06);
   stroke-width: 10;
 }
 
@@ -202,7 +266,7 @@
   stroke-dasharray: 377;
   stroke-dashoffset: 377;
   transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s ease;
-  filter: drop-shadow(0 2px 6px rgba(16, 185, 129, 0.35));
+  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.30));
 }
 
 .compliance-content {
@@ -216,7 +280,7 @@
 .compliance-val {
   font-size: 2.15rem;
   font-weight: 800;
-  font-family: var(--font-family-telemetry);
+  font-family: var(--font-family-data);
   color: var(--text-primary);
   line-height: 1;
 }
@@ -230,40 +294,39 @@
   margin-top: 4px;
 }
 
-/* Smart Scale Biomarker Grid */
+/* ─── Smart Scale Biomarker Grid ─── */
 .biomarker-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 14px;
   margin-top: 16px;
 }
 
 .biomarker-card {
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass-default);
   border-radius: var(--radius-sm);
   padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
   transition: all 0.2s ease;
 }
 
 .biomarker-card:hover {
-  border-color: var(--accent-green);
-  box-shadow: 0 6px 16px rgba(16, 185, 129, 0.08);
+  border-color: rgba(16, 185, 129, 0.20);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .biomarker-card.hazard {
   border-color: var(--border-glass-risk);
-  background: #FEF2F2;
+  background: rgba(248, 113, 113, 0.05);
 }
 
 .biomarker-title {
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   color: var(--text-secondary);
-  font-family: var(--font-family-telemetry);
+  font-family: var(--font-family-data);
   font-weight: 700;
   text-transform: uppercase;
   display: flex;
@@ -272,28 +335,28 @@
 }
 
 .biomarker-val {
-  font-size: 1.625rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--text-primary);
-  font-family: var(--font-family-telemetry);
+  font-family: var(--font-family-data);
   display: flex;
   align-items: baseline;
   gap: 4px;
 }
 
 .biomarker-unit {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: var(--text-secondary);
 }
 
 .biomarker-desc {
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   color: var(--text-secondary);
   line-height: 1.35;
 }
 
-/* Macro Energy HUD Bar */
+/* ─── Macro Energy HUD Bar ─── */
 .macro-hud {
   display: flex;
   flex-direction: column;
@@ -301,32 +364,24 @@
 }
 
 .macro-bar-wrap {
-  height: 10px;
+  height: 8px;
   border-radius: var(--radius-full);
-  background: #E2E8F0;
+  background: rgba(255, 255, 255, 0.06);
   display: flex;
   overflow: hidden;
 }
 
-.macro-seg-protein {
-  background: var(--accent-green);
-}
-
-.macro-seg-carbs {
-  background: var(--telemetry-cyan);
-}
-
-.macro-seg-fats {
-  background: var(--accent-orange);
-}
+.macro-seg-protein { background: var(--accent-green); }
+.macro-seg-carbs { background: var(--telemetry-cyan); }
+.macro-seg-fats { background: var(--accent-orange); }
 
 .macro-legend {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
   gap: 12px;
-  font-size: 0.8125rem;
-  font-family: var(--font-family-telemetry);
+  font-size: 0.75rem;
+  font-family: var(--font-family-data);
 }
 
 .macro-pill {
@@ -343,94 +398,95 @@
   border-radius: 50%;
 }
 
-/* Tabs & Slot Selectors */
+/* ─── Tabs & Slot Selectors ─── */
 .hud-tabs {
   display: flex;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.85);
-  padding: 6px;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 4px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border-glass-default);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
   overflow-x: auto;
 }
 
 .hud-tab-btn {
-  padding: 8px 18px;
-  border-radius: var(--radius-xs);
+  padding: 8px 16px;
+  border-radius: 8px;
   background: transparent;
   color: var(--text-secondary);
   border: none;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
 }
 
-.hud-tab-btn.active {
-  background: #FFFFFF;
-  color: var(--accent-green-hover);
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
-  border: 1px solid var(--accent-green-subtle);
+.hud-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
 }
 
-/* Food & Workout Cards */
+.hud-tab-btn.active {
+  background: rgba(16, 185, 129, 0.10);
+  color: var(--accent-green-hover);
+  font-weight: 700;
+  border: 1px solid rgba(16, 185, 129, 0.20);
+}
+
+/* ─── Food & Workout Cards ─── */
 .food-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 14px;
-  background: #FFFFFF;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass-default);
   border-radius: var(--radius-sm);
-  margin-bottom: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  margin-bottom: 6px;
   transition: all 0.2s ease;
 }
 
 .food-card:hover {
-  border-color: var(--accent-green);
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.1);
+  border-color: rgba(16, 185, 129, 0.20);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .workout-item-card {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 16px;
-  background: #FFFFFF;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass-default);
   border-radius: var(--radius-sm);
-  margin-bottom: 10px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  margin-bottom: 8px;
   transition: all 0.2s ease;
 }
 
 .workout-item-card.completed {
-  border-color: var(--accent-green);
-  background: #ECFDF5;
+  border-color: rgba(16, 185, 129, 0.25);
+  background: rgba(16, 185, 129, 0.06);
 }
 
-/* Clinical Notice Banners */
+/* ─── Notice Banners ─── */
 .clinical-notice {
   padding: 14px 18px;
   border-radius: var(--radius-sm);
-  background: #FFFBEB;
-  border-left: 4px solid var(--telemetry-amber);
-  color: #92400E;
-  font-size: 0.8125rem;
+  background: rgba(251, 191, 36, 0.06);
+  border-left: 3px solid var(--telemetry-amber);
+  color: var(--telemetry-amber);
+  font-size: 0.75rem;
   line-height: 1.45;
   margin: 16px 0;
 }
 
-/* Chatbot Component Styles */
+/* ─── Chatbot Components ─── */
 .chat-container {
   display: flex;
   flex-direction: column;
   height: 600px;
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-glass-default);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-glass-depth);
@@ -441,8 +497,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 16px 20px;
-  background: #F8FAFC;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.03);
   border-bottom: 1px solid var(--border-glass-default);
 }
 
@@ -462,18 +518,13 @@
   gap: 4px;
 }
 
-.chat-msg.user {
-  align-self: flex-end;
-}
-
-.chat-msg.bot {
-  align-self: flex-start;
-}
+.chat-msg.user { align-self: flex-end; }
+.chat-msg.bot { align-self: flex-start; }
 
 .chat-bubble {
-  padding: 14px 18px;
+  padding: 12px 16px;
   border-radius: var(--radius-md);
-  font-size: 0.9375rem;
+  font-size: 0.875rem;
   line-height: 1.45;
 }
 
@@ -481,32 +532,32 @@
   background: var(--accent-orange);
   color: #FFFFFF;
   border-bottom-right-radius: 4px;
-  box-shadow: 0 4px 12px var(--accent-orange-glow);
+  box-shadow: 0 4px 16px var(--accent-orange-glow);
 }
 
 .chat-msg.bot .chat-bubble {
-  background: #F1F5F9;
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text-primary);
   border-bottom-left-radius: 4px;
-  border: 1px solid rgba(15, 23, 42, 0.06);
+  border: 1px solid var(--border-glass-default);
 }
 
 .chat-quick-prompts {
   display: flex;
   gap: 8px;
-  padding: 12px 20px;
-  background: #F8FAFC;
+  padding: 10px 20px;
+  background: rgba(255, 255, 255, 0.02);
   border-top: 1px solid var(--border-glass-default);
   overflow-x: auto;
 }
 
 .prompt-chip {
   padding: 6px 14px;
-  background: #FFFFFF;
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--accent-green-subtle);
   color: var(--accent-green-hover);
   border-radius: var(--radius-full);
-  font-size: 0.75rem;
+  font-size: 0.6875rem;
   font-weight: 600;
   cursor: pointer;
   white-space: nowrap;
@@ -516,12 +567,13 @@
 .prompt-chip:hover {
   background: var(--accent-green);
   color: #FFFFFF;
+  border-color: var(--accent-green);
 }
 
 .chat-input-row {
   display: flex;
   gap: 10px;
-  padding: 16px 20px;
-  background: #FFFFFF;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.02);
   border-top: 1px solid var(--border-glass-default);
 }

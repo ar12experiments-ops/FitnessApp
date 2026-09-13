@@ -12,36 +12,47 @@ $mimeMap = @{
     ".svg"  = "image/svg+xml"
     ".png"  = "image/png"
     ".jpg"  = "image/jpeg"
+    ".webp" = "image/webp"
 }
 
 try {
     while ($listener.IsListening) {
-        $context = $listener.GetContext()
-        $request = $context.Request
-        $response = $context.Response
+        try {
+            $context = $listener.GetContext()
+            $request = $context.Request
+            $response = $context.Response
 
-        $rawUrl = $request.Url.LocalPath
-        if ($rawUrl -eq "/" -or $rawUrl -eq "") {
-            $rawUrl = "/index.html"
-        }
+            $rawUrl = $request.Url.LocalPath
+            if ($rawUrl -eq "/" -or $rawUrl -eq "") {
+                $rawUrl = "/index.html"
+            }
 
-        $localPath = Join-Path (Get-Location) $rawUrl.TrimStart('/')
-        
-        if (Test-Path $localPath -PathType Leaf) {
-            $ext = [System.IO.Path]::GetExtension($localPath).ToLower()
-            $mime = if ($mimeMap.ContainsKey($ext)) { $mimeMap[$ext] } else { "application/octet-stream" }
+            $localPath = Join-Path (Get-Location) $rawUrl.TrimStart('/')
             
-            $bytes = [System.IO.File]::ReadAllBytes($localPath)
-            $response.ContentType = $mime
-            $response.ContentLength64 = $bytes.Length
-            $response.Headers.Add("Access-Control-Allow-Origin", "*")
-            $response.OutputStream.Write($bytes, 0, $bytes.Length)
-        } else {
-            $response.StatusCode = 404
-            $errBytes = [System.Text.Encoding]::UTF8.GetBytes("File Not Found")
-            $response.OutputStream.Write($errBytes, 0, $errBytes.Length)
+            if (Test-Path $localPath -PathType Leaf) {
+                $ext = [System.IO.Path]::GetExtension($localPath).ToLower()
+                $mime = if ($mimeMap.ContainsKey($ext)) { $mimeMap[$ext] } else { "application/octet-stream" }
+                
+                $bytes = [System.IO.File]::ReadAllBytes($localPath)
+                $response.ContentType = $mime
+                $response.ContentLength64 = $bytes.Length
+                $response.Headers.Add("Access-Control-Allow-Origin", "*")
+
+                if ($request.HttpMethod -ne "HEAD") {
+                    $response.OutputStream.Write($bytes, 0, $bytes.Length)
+                }
+            } else {
+                $response.StatusCode = 404
+                $errBytes = [System.Text.Encoding]::UTF8.GetBytes("File Not Found")
+                $response.ContentLength64 = $errBytes.Length
+                if ($request.HttpMethod -ne "HEAD") {
+                    $response.OutputStream.Write($errBytes, 0, $errBytes.Length)
+                }
+            }
+            $response.Close()
+        } catch {
+            Write-Warning "Request error: $_"
         }
-        $response.Close()
     }
 } finally {
     $listener.Stop()

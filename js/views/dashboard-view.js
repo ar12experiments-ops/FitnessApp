@@ -1,6 +1,6 @@
 /**
  * Dashboard View Component: TransformNXT
- * Displays the Light Minimalist telemetry deck: Asian-Indian BMI spectrum,
+ * Displays the Health Dashboard: Asian-Indian BMI spectrum,
  * Smart scale biomarker matrix, phenotype diagnostic, and adherence ring.
  */
 
@@ -61,10 +61,10 @@ export class DashboardView {
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; flex-wrap: wrap; gap: 16px;">
         <div>
           <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 4px;">
-            <span class="telemetry-badge badge-optimal"><span class="beacon-dot optimal"></span> TELEMETRY ACTIVE</span>
-            <span class="brand-tag">PATIENT: ${user.name.toUpperCase()} (${user.age}Y, ${user.gender.toUpperCase()})</span>
+            <span class="telemetry-badge badge-optimal"><span class="beacon-dot optimal"></span> LIVE METRICS</span>
+            <span class="brand-tag">${user.name.toUpperCase()} (${user.age}Y, ${user.gender.toUpperCase()})</span>
           </div>
-          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Biomedical Deck & Telemetry</h1>
+          <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Health Dashboard</h1>
         </div>
         <div style="display: flex; gap: 10px;">
           <button class="btn-glass btn-sm" id="btn-relog-scale">
@@ -88,14 +88,14 @@ export class DashboardView {
               <div>
                 <span class="form-label">ANTHROPOMETRIC CLASSIFICATION</span>
                 <div style="display: flex; align-items: baseline; gap: 12px; margin-top: 4px;">
-                  <span style="font-size: 2.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--text-primary);">
+                  <span style="font-size: 2.25rem; font-weight: 800; font-family: var(--font-family-data); color: var(--text-primary);">
                     ${bmiData.bmi} <span style="font-size: 1rem; color: var(--text-secondary); font-weight: 500;">kg/m²</span>
                   </span>
                   <span class="telemetry-badge ${bmiData.tier.badgeClass}">${bmiData.tier.label}</span>
                 </div>
               </div>
               <div style="text-align: right;">
-                <span style="font-size: 0.75rem; color: var(--text-secondary); font-family: var(--font-family-telemetry);">IDEAL ASIAN-INDIAN WEIGHT</span>
+                <span style="font-size: 0.75rem; color: var(--text-secondary); font-family: var(--font-family-data);">IDEAL ASIAN-INDIAN WEIGHT</span>
                 <div style="font-size: 0.9375rem; font-weight: 700; color: var(--accent-green);">
                   ${bmiData.idealWeightRange.minKg} - ${bmiData.idealWeightRange.maxKg} kg
                 </div>
@@ -132,8 +132,8 @@ export class DashboardView {
             <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.45;">
               ${phenotypeData.phenotype.description}
             </p>
-            <div style="background: #F8FAFC; border: 1px solid var(--border-glass-default); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 0.8125rem; color: var(--text-primary); line-height: 1.45;">
-              <strong style="color: var(--accent-green-hover);">Prescribed Protocol:</strong> ${phenotypeData.phenotype.strategy}
+            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass-default); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 0.8125rem; color: var(--text-primary); line-height: 1.45;">
+              <strong style="color: var(--accent-green-hover);">Recommended Protocol:</strong> ${phenotypeData.phenotype.strategy}
             </div>
           </div>
 
@@ -227,19 +227,19 @@ export class DashboardView {
             <div style="width: 100%; margin-top: 20px; display: flex; flex-direction: column; gap: 8px; text-align: left;">
               <div style="display: flex; justify-content: space-between; font-size: 0.8125rem;">
                 <span style="color: var(--text-secondary);">Calories Target (35% wt):</span>
-                <span style="font-weight: 700; font-family: var(--font-family-telemetry); color: var(--text-primary);">${compliance.factors.calorieMatch}%</span>
+                <span style="font-weight: 700; font-family: var(--font-family-data); color: var(--text-primary);">${compliance.factors.calorieMatch}%</span>
               </div>
               <div style="display: flex; justify-content: space-between; font-size: 0.8125rem;">
                 <span style="color: var(--text-secondary);">Protein Floor (35% wt):</span>
-                <span style="font-weight: 700; font-family: var(--font-family-telemetry); color: var(--accent-green);">${compliance.factors.proteinMatch}%</span>
+                <span style="font-weight: 700; font-family: var(--font-family-data); color: var(--accent-green);">${compliance.factors.proteinMatch}%</span>
               </div>
               <div style="display: flex; justify-content: space-between; font-size: 0.8125rem;">
                 <span style="color: var(--text-secondary);">Workout Completion (20% wt):</span>
-                <span style="font-weight: 700; font-family: var(--font-family-telemetry); color: var(--accent-orange);">${compliance.factors.workoutMatch}%</span>
+                <span style="font-weight: 700; font-family: var(--font-family-data); color: var(--accent-orange);">${compliance.factors.workoutMatch}%</span>
               </div>
               <div style="display: flex; justify-content: space-between; font-size: 0.8125rem;">
                 <span style="color: var(--text-secondary);">Fiber Floor (10% wt):</span>
-                <span style="font-weight: 700; font-family: var(--font-family-telemetry); color: var(--text-primary);">${compliance.factors.fiberMatch}%</span>
+                <span style="font-weight: 700; font-family: var(--font-family-data); color: var(--text-primary);">${compliance.factors.fiberMatch}%</span>
               </div>
             </div>
 
@@ -258,13 +258,13 @@ export class DashboardView {
             <div style="display: flex; justify-content: space-between; margin-bottom: 14px;">
               <div>
                 <span style="font-size: 0.75rem; color: var(--text-secondary);">CALORIE BUDGET</span>
-                <div style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--text-primary);">
+                <div style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-family-data); color: var(--text-primary);">
                   ${plan ? plan.target_daily_calories : 1850} <span style="font-size: 0.75rem; color: var(--text-secondary);">kcal</span>
                 </div>
               </div>
               <div style="text-align: right;">
                 <span style="font-size: 0.75rem; color: var(--text-secondary);">PROTEIN FLOOR</span>
-                <div style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--accent-green);">
+                <div style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-family-data); color: var(--accent-green);">
                   ${plan ? plan.target_protein_g : 115} <span style="font-size: 0.75rem; color: var(--text-secondary);">g</span>
                 </div>
               </div>

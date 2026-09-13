@@ -94,7 +94,7 @@ export class TrackingView {
               <circle class="compliance-bar" cx="70" cy="70" r="60" style="stroke-dashoffset: ${strokeDash}; stroke: ${compliance.statusColor};" />
             </svg>
             <div class="compliance-content">
-              <span style="font-size: 1.35rem; font-weight: 800; font-family: var(--font-family-telemetry); color: ${compliance.statusColor};">
+              <span style="font-size: 1.35rem; font-weight: 800; font-family: var(--font-family-data); color: ${compliance.statusColor};">
                 ${compliance.overallScore}%
               </span>
             </div>
@@ -115,25 +115,25 @@ export class TrackingView {
         <div style="display: flex; gap: 20px; flex-wrap: wrap;">
           <div>
             <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">PROTEIN FLOOR</span>
-            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--accent-green);">
+            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-data); color: var(--accent-green);">
               ${Math.round(this.currentTrackData.totalProtein * 10) / 10} / ${plan.target_protein_g}g
             </div>
           </div>
           <div>
             <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">CARBS</span>
-            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--telemetry-cyan);">
+            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-data); color: var(--telemetry-cyan);">
               ${Math.round(this.currentTrackData.totalCarbs * 10) / 10} / ${plan.target_carbs_g}g
             </div>
           </div>
           <div>
             <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">FATS</span>
-            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--accent-orange);">
+            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-data); color: var(--accent-orange);">
               ${Math.round(this.currentTrackData.totalFats * 10) / 10} / ${plan.target_fats_g}g
             </div>
           </div>
           <div>
             <span style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">DIETARY FIBER</span>
-            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-telemetry); color: var(--text-primary);">
+            <div style="font-size: 1.25rem; font-weight: 800; font-family: var(--font-family-data); color: var(--text-primary);">
               ${Math.round(this.currentTrackData.totalFiber * 10) / 10} / ${plan.target_fiber_g}g
             </div>
           </div>
@@ -158,16 +158,16 @@ export class TrackingView {
               class="form-input" 
               type="text" 
               id="input-food-search" 
-              placeholder="Search Indian dishes (e.g., Dal Tadka, Phulka, Paneer, Sattu, Chicken)..." 
+              placeholder="Search foods (e.g., Dal, Paneer, Chicken, Rice, Eggs)..." 
               value="${this.activeFoodSearch}" 
             />
             <select class="form-select" id="select-food-category" style="max-width: 150px;">
               <option value="">All Types</option>
-              <option value="grains" ${this.selectedFoodCategory === 'grains' ? 'selected' : ''}>Grains/Roti</option>
-              <option value="pulses" ${this.selectedFoodCategory === 'pulses' ? 'selected' : ''}>Dals/Pulses</option>
+              <option value="grains" ${this.selectedFoodCategory === 'grains' ? 'selected' : ''}>Grains / Flatbreads</option>
+              <option value="pulses" ${this.selectedFoodCategory === 'pulses' ? 'selected' : ''}>Lentils / Pulses</option>
               <option value="dairy" ${this.selectedFoodCategory === 'dairy' ? 'selected' : ''}>Dairy/Tofu</option>
               <option value="poultry" ${this.selectedFoodCategory === 'poultry' ? 'selected' : ''}>Poultry/Eggs</option>
-              <option value="vegetables" ${this.selectedFoodCategory === 'vegetables' ? 'selected' : ''}>Sabzis</option>
+              <option value="vegetables" ${this.selectedFoodCategory === 'vegetables' ? 'selected' : ''}>Vegetables</option>
               <option value="fats" ${this.selectedFoodCategory === 'fats' ? 'selected' : ''}>Nuts/Fats</option>
             </select>
           </div>
@@ -203,13 +203,13 @@ export class TrackingView {
             ` : `
               <div style="display: flex; flex-direction: column; gap: 6px;">
                 ${this.currentTrackData.meals.map((m, idx) => `
-                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #F8FAFC; border: 1px solid var(--border-glass-default); border-radius: var(--radius-xs); font-size: 0.8125rem;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass-default); border-radius: var(--radius-xs); font-size: 0.8125rem;">
                     <div>
                       <strong style="color: var(--text-primary);">${m.name}</strong>
                       <span style="color: var(--text-secondary); margin-left: 6px;">x${m.quantity} (${Math.round(m.calories)} kcal)</span>
                     </div>
                     <div style="display: flex; align-items: center; gap: 10px;">
-                      <span style="color: var(--accent-green); font-family: var(--font-family-telemetry); font-weight: 600;">${Math.round(m.protein * 10) / 10}g P</span>
+                      <span style="color: var(--accent-green); font-family: var(--font-family-data); font-weight: 600;">${Math.round(m.protein * 10) / 10}g P</span>
                       <button class="btn-glass btn-remove-meal" data-meal-index="${idx}" style="padding: 2px 8px; font-size: 0.75rem; color: var(--telemetry-crimson);">✕</button>
                     </div>
                   </div>

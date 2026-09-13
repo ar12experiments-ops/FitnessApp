@@ -193,6 +193,27 @@ class StorageService {
       throw err;
     }
   }
+
+  // --- RENDER BACKEND SYNC ---
+  async syncToBackend() {
+    try {
+      const backupJson = await this.exportCompleteBackup();
+      const res = await fetch("/api/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: backupJson
+      });
+      if (res.ok) {
+        const data = await res.json();
+        console.log("[TransformNXT Backend] Telemetry synced to server:", data);
+        return data;
+      }
+    } catch (err) {
+      // Graceful silence if running on purely static local environment
+      console.debug("[TransformNXT] Server sync offline/skipped:", err.message);
+    }
+    return null;
+  }
 }
 
 export const dbService = new StorageService();

@@ -606,6 +606,7 @@ export class OnboardingView {
           exercise_routine: exercisePlan
         };
         await dbService.saveWeeklyPlan(weeklyPlan);
+        dbService.syncToBackend();
 
         // Unlock Dashboard, Chatbot, Tracker and Navigate
         this.app.showNotification(`Parameters saved! Welcome to TransformNXT, ${user.name}.`);

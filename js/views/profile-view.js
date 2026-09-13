@@ -270,6 +270,7 @@ export class ProfileView {
         exercise_routine: exercisePlan
       };
       await dbService.saveWeeklyPlan(weeklyPlan);
+      dbService.syncToBackend();
 
       this.app.showNotification("Profile updated & new plan generated!");
       await this.app.updateHeaderUser();

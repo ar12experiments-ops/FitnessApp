@@ -1,0 +1,26 @@
+{
+  "name": "transformnxt-fitness-app",
+  "version": "1.0.0",
+  "description": "Evidence-Based Indian Fitness & Nutrition Application with Light Liquid Glass Design",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "cors": "^2.8.5"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "fitness",
+    "icmr-nin",
+    "nutrition",
+    "glassmorphism",
+    "render"
+  ],
+  "author": "TransformNXT",
+  "license": "MIT"
+}

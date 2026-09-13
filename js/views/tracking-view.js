@@ -388,6 +388,7 @@ export class TrackingView {
       };
 
       await dbService.saveDailyTracking(trackRecord);
+      dbService.syncToBackend();
       this.app.showNotification(`Synced! Daily Plan Match: ${compliance.overallScore}%`);
     });
   }

@@ -1,5 +1,6 @@
 /* ==========================================================================
-   TransformNXT: Layout & Responsive Structure — Dark Liquid Glass Theme
+   TransformNXT: Layout & Responsive Structure — Light Liquid Glass Theme
+   Inspired by Payrix SaaS Web Finance Dashboard (liquidglassdesign.com)
    ========================================================================== */
 
 /* Main Layout Grid */
@@ -9,7 +10,7 @@
   min-height: 100vh;
   max-width: 1360px;
   margin: 0 auto;
-  padding: 0 20px 80px 20px;
+  padding: 0 24px 80px 24px;
   position: relative;
   z-index: 1;
 }
@@ -19,42 +20,42 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 0;
-  border-bottom: 1px solid var(--border-glass-default);
-  margin-bottom: 24px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
+  margin-bottom: 28px;
 }
 
 .brand-wrap {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 14px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
 
 .brand-wrap:hover .brand-logo-icon {
-  transform: scale(1.05);
-  border-color: var(--accent-green);
-  box-shadow: 0 0 20px var(--accent-green-glow);
+  transform: scale(1.06);
+  box-shadow: 0 8px 24px rgba(2, 132, 199, 0.35);
 }
 
 .brand-logo-icon {
-  width: 36px;
-  height: 36px;
-  background: var(--accent-green-subtle);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  width: 38px;
+  height: 38px;
+  background: var(--accent-blue-gradient);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: var(--radius-sm);
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--accent-green);
-  box-shadow: 0 0 16px var(--accent-green-glow);
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(2, 132, 199, 0.25);
+  transition: all 0.2s ease;
 }
 
 .brand-title {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
   font-weight: 800;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: var(--text-primary);
   display: flex;
   align-items: baseline;
@@ -67,11 +68,11 @@
 
 .brand-tag {
   font-size: 0.625rem;
-  color: var(--text-secondary);
+  color: var(--accent-blue);
   font-family: var(--font-family-data);
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 600;
+  letter-spacing: 0.10em;
+  font-weight: 800;
 }
 
 /* ─── Header Status Tray ─── */
@@ -85,69 +86,73 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.85);
   border: 1px solid var(--border-glass-default);
-  padding: 6px 14px;
+  padding: 7px 16px;
   border-radius: var(--radius-full);
   font-size: 0.75rem;
   color: var(--text-primary);
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(15, 55, 90, 0.05);
   transition: all 0.2s ease;
 }
 
 .profile-pill:hover {
-  border-color: var(--accent-green);
-  box-shadow: 0 0 12px var(--accent-green-glow);
-  background: rgba(16, 185, 129, 0.06);
+  border-color: var(--accent-blue);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.15);
+  color: var(--accent-blue);
 }
 
-/* ─── Desktop Navigation Bar ─── */
+/* ─── Desktop Navigation Bar (Payrix Floating Pill Bar) ─── */
 .desktop-nav {
   display: flex;
   align-items: center;
   gap: 4px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.78);
   backdrop-filter: var(--glass-blur-default);
-  padding: 4px;
+  -webkit-backdrop-filter: var(--glass-blur-default);
+  padding: 5px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--border-glass-default);
+  border: 1px solid rgba(255, 255, 255, 0.90);
+  box-shadow: 0 8px 24px rgba(15, 55, 90, 0.06), inset 0 1px 1px rgba(255, 255, 255, 1);
 }
 
 .nav-link {
   display: flex;
   align-items: center;
-  gap: 6px;
-  padding: 7px 14px;
+  gap: 7px;
+  padding: 8px 16px;
   border-radius: var(--radius-full);
   color: var(--text-secondary);
   text-decoration: none;
   font-size: 0.8125rem;
   font-weight: 600;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   border: 1px solid transparent;
   cursor: pointer;
 }
 
 .nav-link:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .nav-link.active {
-  color: var(--accent-green-hover);
-  background: rgba(16, 185, 129, 0.08);
-  border-color: rgba(16, 185, 129, 0.20);
-  box-shadow: 0 0 12px var(--accent-green-glow);
+  color: var(--accent-blue);
+  background: #FFFFFF;
+  border-color: rgba(2, 132, 199, 0.25);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.16);
+  font-weight: 700;
 }
 
 /* Chatbot tab with orange accent */
 .nav-link[data-view="chatbot"].active {
-  color: var(--accent-orange-hover);
-  background: rgba(249, 115, 22, 0.08);
-  border-color: rgba(249, 115, 22, 0.20);
-  box-shadow: 0 0 12px var(--accent-orange-glow);
+  color: var(--accent-orange);
+  background: #FFFFFF;
+  border-color: rgba(255, 122, 0, 0.25);
+  box-shadow: 0 4px 14px rgba(255, 122, 0, 0.16);
 }
 
 /* ─── Views Container ─── */
@@ -169,36 +174,36 @@
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
-  gap: 20px;
+  gap: 24px;
 }
 
 .plan-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 24px;
 }
 
 .tracking-grid {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
-  gap: 20px;
+  gap: 24px;
 }
 
 /* ─── Sticky Bottom Mobile Navigation ─── */
 .mobile-nav {
   display: none;
   position: fixed;
-  bottom: 12px;
+  bottom: 14px;
   left: 16px;
   right: 16px;
-  background: rgba(13, 18, 36, 0.85);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: var(--glass-blur-heavy);
   -webkit-backdrop-filter: var(--glass-blur-heavy);
-  border: 1px solid var(--border-glass-default);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   border-radius: var(--radius-full);
   padding: 8px 12px;
   z-index: 100;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.40);
+  box-shadow: 0 12px 36px rgba(15, 55, 90, 0.12), inset 0 1px 1px #FFF;
   justify-content: space-around;
 }
 
@@ -214,18 +219,15 @@
   font-weight: 600;
   cursor: pointer;
   padding: 6px 12px;
-  border-radius: var(--radius-full);
+  border-radius: var(--radius-sm);
   transition: all 0.2s ease;
 }
 
 .mobile-nav-btn.active {
-  color: var(--accent-green-hover);
-  background: var(--accent-green-subtle);
-}
-
-.mobile-nav-btn[data-view="chatbot"].active {
-  color: var(--accent-orange-hover);
-  background: var(--accent-orange-subtle);
+  color: var(--accent-blue);
+  background: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.15);
+  font-weight: 700;
 }
 
 .mobile-nav-btn svg {
@@ -238,11 +240,9 @@
   .dashboard-grid, .plan-grid, .tracking-grid {
     grid-template-columns: 1fr;
   }
-}
-
-@media (max-width: 768px) {
+  
   .desktop-nav {
-    display: none;
+    display: none !important;
   }
 
   .mobile-nav {
@@ -251,10 +251,5 @@
 
   .app-container {
     padding-bottom: 90px;
-  }
-
-  .hud-header {
-    flex-wrap: wrap;
-    gap: 12px;
   }
 }

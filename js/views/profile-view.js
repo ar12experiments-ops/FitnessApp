@@ -159,7 +159,7 @@ export class ProfileView {
           </div>
 
           <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;">
-            <button type="submit" class="btn-green" style="padding: 14px 32px; font-size: 1rem;">
+            <button type="submit" class="btn-blue" style="padding: 14px 32px; font-size: 1rem;">
               <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
               Recalculate & Update Plan
             </button>

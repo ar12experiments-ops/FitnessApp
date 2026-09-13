@@ -79,7 +79,7 @@ export class TrackingView {
           <h1 style="font-size: 1.75rem; font-weight: 800; letter-spacing: -0.02em; color: var(--text-primary);">Daily Intake & Workout Logger</h1>
         </div>
 
-        <button class="btn-green" id="btn-save-log-progress" style="padding: 10px 20px;">
+        <button class="btn-blue" id="btn-save-log-progress" style="padding: 10px 20px;">
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
           Save & Sync Daily Progress
         </button>
@@ -184,7 +184,7 @@ export class TrackingView {
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
                   <input type="number" class="form-input food-qty-input" data-food-id="${f.id}" min="0.5" max="10" step="0.5" value="1" style="width: 60px; padding: 6px; text-align: center;" />
-                  <button class="btn-green btn-sm btn-add-food" data-food-id="${f.id}">
+                  <button class="btn-blue btn-sm btn-add-food" data-food-id="${f.id}">
                     + Add
                   </button>
                 </div>

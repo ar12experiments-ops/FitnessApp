@@ -84,11 +84,11 @@ export class OnboardingView {
 
         <!-- Progress Steps (Payrix Liquid Glass Style) -->
         <div style="display: flex; justify-content: space-between; margin-bottom: 24px; position: relative; padding: 0 20px;">
-          <div style="position: absolute; top: 18px; left: 18%; right: 18%; height: 2px; background: rgba(255,255,255,0.08); z-index: 0;"></div>
+          <div style="position: absolute; top: 18px; left: 18%; right: 18%; height: 2px; background: rgba(15,23,42,0.08); z-index: 0;"></div>
           
           <!-- Step 1 Indicator -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 1; cursor: pointer;" id="step-nav-1">
-            <div style="width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem; transition: all 0.2s ease; ${this.currentStep === 1 ? 'background: var(--accent-green-gradient); color: #FFF; box-shadow: 0 0 16px var(--accent-green-glow);' : this.currentStep > 1 ? 'background: rgba(16,185,129,0.2); color: var(--accent-green); border: 1px solid var(--accent-green);' : 'background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border-glass-default);'}">
+            <div style="width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem; transition: all 0.2s ease; ${this.currentStep === 1 ? 'background: var(--accent-blue-gradient); color: #FFF; box-shadow: 0 4px 14px var(--accent-blue-glow);' : this.currentStep > 1 ? 'background: rgba(2,132,199,0.12); color: var(--accent-blue); border: 1px solid var(--accent-blue);' : 'background: rgba(255,255,255,0.8); color: var(--text-muted); border: 1px solid rgba(15,23,42,0.1);'}">
               ${this.currentStep > 1 ? '✓' : '1'}
             </div>
             <span style="font-size: 0.75rem; font-weight: 700; color: ${this.currentStep === 1 ? 'var(--text-primary)' : 'var(--text-muted)'};">1. Profile</span>
@@ -96,7 +96,7 @@ export class OnboardingView {
 
           <!-- Step 2 Indicator -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 1; cursor: pointer;" id="step-nav-2">
-            <div style="width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem; transition: all 0.2s ease; ${this.currentStep === 2 ? 'background: var(--accent-green-gradient); color: #FFF; box-shadow: 0 0 16px var(--accent-green-glow);' : this.currentStep > 2 ? 'background: rgba(16,185,129,0.2); color: var(--accent-green); border: 1px solid var(--accent-green);' : 'background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border-glass-default);'}">
+            <div style="width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem; transition: all 0.2s ease; ${this.currentStep === 2 ? 'background: var(--accent-blue-gradient); color: #FFF; box-shadow: 0 4px 14px var(--accent-blue-glow);' : this.currentStep > 2 ? 'background: rgba(2,132,199,0.12); color: var(--accent-blue); border: 1px solid var(--accent-blue);' : 'background: rgba(255,255,255,0.8); color: var(--text-muted); border: 1px solid rgba(15,23,42,0.1);'}">
               ${this.currentStep > 2 ? '✓' : '2'}
             </div>
             <span style="font-size: 0.75rem; font-weight: 700; color: ${this.currentStep === 2 ? 'var(--text-primary)' : 'var(--text-muted)'};">2. Health Metrics</span>
@@ -104,7 +104,7 @@ export class OnboardingView {
 
           <!-- Step 3 Indicator -->
           <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 1; cursor: pointer;" id="step-nav-3">
-            <div style="width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem; transition: all 0.2s ease; ${this.currentStep === 3 ? 'background: var(--accent-orange-gradient); color: #FFF; box-shadow: 0 0 16px var(--accent-orange-glow);' : 'background: rgba(255,255,255,0.06); color: var(--text-muted); border: 1px solid var(--border-glass-default);'}">
+            <div style="width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.875rem; transition: all 0.2s ease; ${this.currentStep === 3 ? 'background: var(--accent-orange-gradient); color: #FFF; box-shadow: 0 4px 14px var(--accent-orange-glow);' : 'background: rgba(255,255,255,0.8); color: var(--text-muted); border: 1px solid rgba(15,23,42,0.1);'}">
               3
             </div>
             <span style="font-size: 0.75rem; font-weight: 700; color: ${this.currentStep === 3 ? 'var(--text-primary)' : 'var(--text-muted)'};">3. Food & Diet</span>
@@ -180,7 +180,7 @@ export class OnboardingView {
           </div>
 
           <div style="display: flex; justify-content: flex-end; margin-top: 32px;">
-            <button type="button" class="btn-green" id="btn-ob-next-1" style="padding: 12px 28px; font-size: 0.9375rem;">
+            <button type="button" class="btn-blue" id="btn-ob-next-1" style="padding: 12px 28px; font-size: 0.9375rem;">
               Next: Health Parameters
               <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
             </button>
@@ -235,7 +235,7 @@ export class OnboardingView {
           </div>
 
           <!-- Live Asian-Indian BMI Preview Pill -->
-          <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass-default); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div style="background: rgba(255,255,255,0.75); border: 1px solid rgba(15,23,42,0.08); border-radius: var(--radius-sm); padding: 14px 18px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; box-shadow: 0 4px 14px rgba(15,55,90,0.04);">
             <div>
               <span style="font-size: 0.6875rem; color: var(--text-secondary); font-weight: 700; text-transform: uppercase;">ASIAN-INDIAN BMI (WHO CUTOFF)</span>
               <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 2px;">
@@ -326,7 +326,7 @@ export class OnboardingView {
             <button type="button" class="btn-glass" id="btn-ob-back-1" style="padding: 12px 24px;">
               ← Back
             </button>
-            <button type="button" class="btn-green" id="btn-ob-next-2" style="padding: 12px 28px; font-size: 0.9375rem;">
+            <button type="button" class="btn-blue" id="btn-ob-next-2" style="padding: 12px 28px; font-size: 0.9375rem;">
               Next: Food Preferences →
             </button>
           </div>

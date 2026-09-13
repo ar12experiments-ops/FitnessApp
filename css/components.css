@@ -1,22 +1,48 @@
 /* ==========================================================================
-   TransformNXT: Component UI System — Dark Liquid Glass Theme
-   Green & Orange Accent Glows, Frosted Floating Tiles, Dark Canvas
+   TransformNXT: Component UI System — Light Liquid Glass Theme
+   Inspired by Payrix SaaS Web Finance Dashboard (liquidglassdesign.com)
+   Vibrant cerulean blue & molten orange glows, milky frosted tiles, crisp slate text
    ========================================================================== */
 
 /* ─── Buttons ─── */
-.btn-green {
+.btn-blue {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: var(--accent-green);
+  background: var(--accent-blue-gradient);
   color: #FFFFFF;
   font-family: var(--font-family-ui);
   font-weight: 700;
   font-size: 0.875rem;
   padding: 10px 22px;
   border-radius: var(--radius-sm);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  box-shadow: 0 4px 16px var(--accent-blue-glow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+}
+
+.btn-blue:hover {
+  background: linear-gradient(135deg, #0369A1 0%, #0284C7 100%);
+  box-shadow: 0 6px 22px rgba(2, 132, 199, 0.45);
+  transform: translateY(-1px);
+}
+
+.btn-green {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--accent-green-gradient);
+  color: #FFFFFF;
+  font-family: var(--font-family-ui);
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
   box-shadow: 0 4px 16px var(--accent-green-glow);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -24,8 +50,8 @@
 }
 
 .btn-green:hover {
-  background: var(--accent-green-hover);
-  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.35);
+  background: linear-gradient(135deg, #059669 0%, #10B981 100%);
+  box-shadow: 0 6px 22px rgba(16, 185, 129, 0.40);
   transform: translateY(-1px);
 }
 
@@ -34,14 +60,14 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: var(--accent-orange);
+  background: var(--accent-orange-gradient);
   color: #FFFFFF;
   font-family: var(--font-family-ui);
   font-weight: 700;
   font-size: 0.875rem;
   padding: 10px 22px;
   border-radius: var(--radius-sm);
-  border: none;
+  border: 1px solid rgba(255, 255, 255, 0.35);
   cursor: pointer;
   box-shadow: 0 4px 16px var(--accent-orange-glow);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -49,8 +75,8 @@
 }
 
 .btn-orange:hover {
-  background: var(--accent-orange-hover);
-  box-shadow: 0 6px 24px rgba(249, 115, 22, 0.35);
+  background: linear-gradient(135deg, #EA580C 0%, #FF7A00 100%);
+  box-shadow: 0 6px 22px rgba(255, 122, 0, 0.45);
   transform: translateY(-1px);
 }
 
@@ -59,25 +85,27 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.85);
   color: var(--text-primary);
   font-family: var(--font-family-ui);
   font-weight: 600;
   font-size: 0.8125rem;
   padding: 8px 16px;
   border-radius: var(--radius-sm);
-  border: 1px solid var(--border-glass-default);
+  border: 1px solid rgba(15, 23, 42, 0.09);
   cursor: pointer;
   backdrop-filter: blur(8px);
+  box-shadow: 0 2px 6px rgba(15, 55, 90, 0.04);
   transition: all 0.2s ease;
   text-decoration: none;
 }
 
 .btn-glass:hover {
-  border-color: var(--accent-green);
-  color: var(--accent-green-hover);
-  background: rgba(16, 185, 129, 0.06);
-  box-shadow: 0 0 16px rgba(16, 185, 129, 0.10);
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  background: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.15);
+  transform: translateY(-1px);
 }
 
 .btn-sm {
@@ -103,8 +131,8 @@
 }
 
 .form-input, .form-select {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border-glass-default);
+  background: #FFFFFF;
+  border: 1px solid rgba(15, 23, 42, 0.12);
   border-radius: var(--radius-sm);
   color: var(--text-primary);
   font-family: var(--font-family-ui);
@@ -113,7 +141,7 @@
   outline: none;
   transition: all 0.2s ease;
   width: 100%;
-  backdrop-filter: blur(8px);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .form-input::placeholder {
@@ -121,21 +149,21 @@
 }
 
 .form-input:focus, .form-select:focus {
-  border-color: var(--accent-green);
-  box-shadow: 0 0 0 3px var(--accent-green-subtle), 0 0 16px var(--accent-green-glow);
-  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+  background: #FFFFFF;
 }
 
 .form-select {
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='rgba(255,255,255,0.4)' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23475569' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 12px center;
-  padding-right: 32px;
+  background-position: right 14px center;
+  padding-right: 36px;
 }
 
 .form-select option {
-  background: #141929;
+  background: #FFFFFF;
   color: var(--text-primary);
 }
 
@@ -146,15 +174,16 @@
 }
 
 .ob-sex-toggle.active-sex {
-  background: rgba(16, 185, 129, 0.15);
-  border-color: var(--accent-green);
-  color: var(--accent-green-hover);
-  box-shadow: 0 0 16px var(--accent-green-glow);
+  background: #FFFFFF;
+  border-color: var(--accent-blue);
+  color: var(--accent-blue);
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.18);
+  font-weight: 800;
 }
 
 .diet-card-pill {
-  background: rgba(255, 255, 255, 0.035);
-  border: 1px solid var(--border-glass-default);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   border-radius: var(--radius-sm);
   padding: 14px 12px;
   display: flex;
@@ -163,25 +192,26 @@
   text-align: center;
   gap: 4px;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(15, 55, 90, 0.04);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-  backdrop-filter: blur(8px);
 }
 
 .diet-card-pill:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.2);
+  background: #FFFFFF;
+  border-color: var(--accent-blue);
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.12);
   transform: translateY(-2px);
 }
 
 .diet-card-pill.active-diet {
-  background: rgba(16, 185, 129, 0.12);
-  border-color: var(--accent-green);
-  box-shadow: 0 0 20px var(--accent-green-glow);
+  background: #FFFFFF;
+  border-color: var(--accent-blue);
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.20);
   transform: translateY(-2px);
 }
 
 .diet-card-pill.active-diet strong {
-  color: var(--accent-green-hover);
+  color: var(--accent-blue);
 }
 
 /* ─── Asian-Indian BMI Spectrum Gauge ─── */
@@ -198,29 +228,29 @@
   border-radius: var(--radius-full);
   background: linear-gradient(
     to right,
-    #22D3EE 0%,    /* Underweight: <18.5 */
-    #22D3EE 25%,
+    #0284C7 0%,    /* Underweight: <18.5 */
+    #0284C7 25%,
     #10B981 25%,   /* Normal: 18.5 - 22.9 */
     #10B981 50%,
     #FBBF24 50%,   /* Overweight: 23.0 - 24.9 */
-    #FBBF24 65%,
-    #F87171 65%,   /* Obese: >=25.0 */
-    #F87171 100%
+    #FBBF24 75%,
+    #EF4444 75%,   /* Obese: >= 25.0 */
+    #EF4444 100%
   );
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.10);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 .bmi-pointer {
   position: absolute;
-  top: -7px;
-  width: 24px;
-  height: 24px;
-  background: var(--bg-void);
-  border: 3px solid rgba(255, 255, 255, 0.85);
-  border-radius: 50%;
+  top: -5px;
+  width: 6px;
+  height: 20px;
+  background: #0F172A;
+  border: 2px solid #FFFFFF;
+  border-radius: 3px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transform: translateX(-50%);
-  box-shadow: 0 0 12px rgba(255, 255, 255, 0.20);
-  transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: left 0.3s ease;
 }
 
 .bmi-labels {
@@ -228,195 +258,117 @@
   justify-content: space-between;
   font-size: 0.6875rem;
   color: var(--text-secondary);
+  text-align: center;
+}
+
+/* ─── Smart Scale Biomarker Matrix Grid ─── */
+.scale-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.matrix-card {
+  background: rgba(255, 255, 255, 0.70);
+  border: 1px solid rgba(15, 23, 42, 0.07);
+  border-radius: var(--radius-sm);
+  padding: 14px 12px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(15, 55, 90, 0.03);
+  transition: all 0.2s ease;
+}
+
+.matrix-card:hover {
+  background: #FFFFFF;
+  border-color: rgba(2, 132, 199, 0.25);
+  box-shadow: 0 6px 16px rgba(2, 132, 199, 0.08);
+  transform: translateY(-1px);
+}
+
+.matrix-label {
+  font-size: 0.625rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 0.05em;
   font-family: var(--font-family-data);
 }
 
-.bmi-labels span {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.matrix-val {
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-family: var(--font-family-data);
+  color: var(--text-primary);
+  margin: 4px 0 2px;
 }
 
-/* ─── Circular Adherence Ring ─── */
+.matrix-sub {
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+/* ─── Compliance Ring Progress ─── */
 .compliance-ring-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+  padding: 20px 0;
 }
 
-.compliance-svg {
-  transform: rotate(-90deg);
+.ring-svg {
   width: 140px;
   height: 140px;
+  transform: rotate(-90deg);
 }
 
-.compliance-bg {
+.compliance-track {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.06);
+  stroke: rgba(15, 23, 42, 0.08);
   stroke-width: 10;
 }
 
 .compliance-bar {
   fill: none;
-  stroke: var(--accent-green);
   stroke-width: 10;
   stroke-linecap: round;
   stroke-dasharray: 377;
-  stroke-dashoffset: 377;
   transition: stroke-dashoffset 0.8s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.3s ease;
-  filter: drop-shadow(0 0 8px rgba(16, 185, 129, 0.30));
 }
 
 .compliance-content {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
-.compliance-val {
-  font-size: 2.15rem;
-  font-weight: 800;
-  font-family: var(--font-family-data);
-  color: var(--text-primary);
-  line-height: 1;
-}
-
-.compliance-sub {
-  font-size: 0.6875rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-  margin-top: 4px;
-}
-
-/* ─── Smart Scale Biomarker Grid ─── */
-.biomarker-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 14px;
-  margin-top: 16px;
-}
-
-.biomarker-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-glass-default);
-  border-radius: var(--radius-sm);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  transition: all 0.2s ease;
-}
-
-.biomarker-card:hover {
-  border-color: rgba(16, 185, 129, 0.20);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.biomarker-card.hazard {
-  border-color: var(--border-glass-risk);
-  background: rgba(248, 113, 113, 0.05);
-}
-
-.biomarker-title {
-  font-size: 0.6875rem;
-  color: var(--text-secondary);
-  font-family: var(--font-family-data);
-  font-weight: 700;
-  text-transform: uppercase;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.biomarker-val {
-  font-size: 1.5rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  font-family: var(--font-family-data);
-  display: flex;
-  align-items: baseline;
-  gap: 4px;
-}
-
-.biomarker-unit {
-  font-size: 0.75rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.biomarker-desc {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  line-height: 1.35;
-}
-
-/* ─── Macro Energy HUD Bar ─── */
-.macro-hud {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.macro-bar-wrap {
-  height: 8px;
-  border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.06);
-  display: flex;
-  overflow: hidden;
-}
-
-.macro-seg-protein { background: var(--accent-green); }
-.macro-seg-carbs { background: var(--telemetry-cyan); }
-.macro-seg-fats { background: var(--accent-orange); }
-
-.macro-legend {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  font-size: 0.75rem;
-  font-family: var(--font-family-data);
-}
-
-.macro-pill {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-.macro-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-/* ─── Tabs & Slot Selectors ─── */
+/* ─── HUD Tabs ─── */
 .hud-tabs {
   display: flex;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.03);
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.78);
   padding: 4px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border-glass-default);
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.90);
+  box-shadow: 0 2px 10px rgba(15, 55, 90, 0.04);
   overflow-x: auto;
 }
 
 .hud-tab-btn {
-  padding: 8px 16px;
-  border-radius: 8px;
   background: transparent;
-  color: var(--text-secondary);
   border: none;
+  color: var(--text-secondary);
   font-size: 0.75rem;
   font-weight: 600;
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
   cursor: pointer;
   transition: all 0.2s ease;
   white-space: nowrap;
@@ -424,48 +376,51 @@
 
 .hud-tab-btn:hover {
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .hud-tab-btn.active {
-  background: rgba(16, 185, 129, 0.10);
-  color: var(--accent-green-hover);
+  background: #FFFFFF;
+  color: var(--accent-blue);
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.15);
   font-weight: 700;
-  border: 1px solid rgba(16, 185, 129, 0.20);
 }
 
-/* ─── Food & Workout Cards ─── */
+/* ─── Food & Workout Items ─── */
 .food-card {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-glass-default);
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: var(--radius-sm);
-  margin-bottom: 6px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 6px rgba(15, 55, 90, 0.03);
   transition: all 0.2s ease;
 }
 
 .food-card:hover {
-  border-color: rgba(16, 185, 129, 0.20);
-  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(2, 132, 199, 0.30);
+  background: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(2, 132, 199, 0.10);
+  transform: translateY(-1px);
 }
 
 .workout-item-card {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-glass-default);
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(15, 23, 42, 0.06);
   border-radius: var(--radius-sm);
   margin-bottom: 8px;
+  box-shadow: 0 2px 6px rgba(15, 55, 90, 0.03);
   transition: all 0.2s ease;
 }
 
 .workout-item-card.completed {
-  border-color: rgba(16, 185, 129, 0.25);
+  border-color: rgba(16, 185, 129, 0.35);
   background: rgba(16, 185, 129, 0.06);
 }
 
@@ -473,9 +428,9 @@
 .clinical-notice {
   padding: 14px 18px;
   border-radius: var(--radius-sm);
-  background: rgba(251, 191, 36, 0.06);
-  border-left: 3px solid var(--telemetry-amber);
-  color: var(--telemetry-amber);
+  background: rgba(255, 122, 0, 0.08);
+  border-left: 3px solid var(--accent-orange);
+  color: #9A3412;
   font-size: 0.75rem;
   line-height: 1.45;
   margin: 16px 0;
@@ -486,8 +441,8 @@
   display: flex;
   flex-direction: column;
   height: 600px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-glass-default);
+  background: rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.90);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-glass-depth);
   overflow: hidden;
@@ -497,9 +452,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border-bottom: 1px solid var(--border-glass-default);
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.90);
+  border-bottom: 1px solid rgba(15, 23, 42, 0.07);
 }
 
 .chat-messages {
@@ -525,55 +480,58 @@
   padding: 12px 16px;
   border-radius: var(--radius-md);
   font-size: 0.875rem;
-  line-height: 1.45;
+  line-height: 1.5;
 }
 
 .chat-msg.user .chat-bubble {
-  background: var(--accent-orange);
+  background: var(--accent-blue-gradient);
   color: #FFFFFF;
   border-bottom-right-radius: 4px;
-  box-shadow: 0 4px 16px var(--accent-orange-glow);
+  box-shadow: 0 4px 16px var(--accent-blue-glow);
 }
 
 .chat-msg.bot .chat-bubble {
-  background: rgba(255, 255, 255, 0.06);
+  background: #FFFFFF;
   color: var(--text-primary);
   border-bottom-left-radius: 4px;
-  border: 1px solid var(--border-glass-default);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 2px 8px rgba(15, 55, 90, 0.04);
 }
 
 .chat-quick-prompts {
   display: flex;
   gap: 8px;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border-top: 1px solid var(--border-glass-default);
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.85);
+  border-top: 1px solid rgba(15, 23, 42, 0.07);
   overflow-x: auto;
 }
 
 .prompt-chip {
   padding: 6px 14px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--accent-green-subtle);
-  color: var(--accent-green-hover);
+  background: #FFFFFF;
+  border: 1px solid rgba(2, 132, 199, 0.20);
+  color: var(--accent-blue);
   border-radius: var(--radius-full);
   font-size: 0.6875rem;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(15, 55, 90, 0.04);
   transition: all 0.2s ease;
 }
 
 .prompt-chip:hover {
-  background: var(--accent-green);
+  background: var(--accent-blue);
   color: #FFFFFF;
-  border-color: var(--accent-green);
+  border-color: var(--accent-blue);
+  box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
 }
 
 .chat-input-row {
   display: flex;
   gap: 10px;
   padding: 14px 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border-top: 1px solid var(--border-glass-default);
+  background: rgba(255, 255, 255, 0.90);
+  border-top: 1px solid rgba(15, 23, 42, 0.07);
 }

@@ -49,7 +49,7 @@ export class LandingView {
 
           <!-- Hero Headline -->
           <h1 class="landing-title">
-            Transform Your Health with <span class="highlight-gradient">Clinical Precision</span>
+            Transform Your Health with <span class="highlight-blue">Clinical Precision</span>
           </h1>
 
           <!-- Subtitle -->

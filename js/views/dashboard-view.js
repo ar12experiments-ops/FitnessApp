@@ -71,7 +71,7 @@ export class DashboardView {
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
             Update Scale Data
           </button>
-          <button class="btn-green btn-sm" id="btn-quick-track">
+          <button class="btn-blue btn-sm" id="btn-quick-track">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             Log Today's Intake / Workout
           </button>
@@ -132,8 +132,8 @@ export class DashboardView {
             <p style="font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 12px; line-height: 1.45;">
               ${phenotypeData.phenotype.description}
             </p>
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-glass-default); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 0.8125rem; color: var(--text-primary); line-height: 1.45;">
-              <strong style="color: var(--accent-green-hover);">Recommended Protocol:</strong> ${phenotypeData.phenotype.strategy}
+            <div style="background: rgba(2, 132, 199, 0.06); border: 1px solid rgba(2, 132, 199, 0.20); padding: 14px 18px; border-radius: var(--radius-sm); font-size: 0.8125rem; color: var(--text-primary); line-height: 1.45;">
+              <strong style="color: var(--accent-blue);">Recommended Protocol:</strong> ${phenotypeData.phenotype.strategy}
             </div>
           </div>
 

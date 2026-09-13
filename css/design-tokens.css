@@ -1,0 +1,60 @@
+/* ==========================================================================
+   TransformNXT Design System: Cyber-Clinical Glass Tokens
+   Infinite Black (#000000), Cyber Laser Green (#00FF66), Translucent Frosted Glass
+   ========================================================================== */
+
+:root {
+  /* Canvas & Void Base */
+  --bg-void: #000000;
+  --bg-space: #080808;
+  --bg-surface-glass: rgba(20, 20, 20, 0.65);
+  --bg-surface-glass-hover: rgba(28, 28, 28, 0.8);
+  --bg-surface-elevated: rgba(30, 30, 30, 0.85);
+  --bg-input-glass: rgba(14, 14, 14, 0.7);
+
+  /* Primary Signature Accent: Cyber Laser Green */
+  --accent-laser-green: #00FF66;
+  --accent-laser-green-hover: #1aff75;
+  --accent-laser-green-glow: rgba(0, 255, 102, 0.35);
+  --accent-laser-green-subtle: rgba(0, 255, 102, 0.12);
+
+  /* Telemetry Status Spectrum */
+  --telemetry-optimal: #00FF66;    /* Optimal status / Met targets */
+  --telemetry-cyan: #00F0FF;       /* Hydration / Bio-impedance water % / Aerobic */
+  --telemetry-amber: #FFB800;      /* Warning / Asian-Indian Overweight threshold */
+  --telemetry-crimson: #FF2D55;    /* High risk / Visceral fat hazard / Deficit */
+  --telemetry-purple: #BF5AF2;     /* Muscle mass / Hypertrophy */
+
+  /* Text & Data Contrast */
+  --text-primary: #FFFFFF;
+  --text-secondary: #8E8E93;
+  --text-tertiary: #545458;
+  --text-laser: #00FF66;
+
+  /* Glass Hairlines & Borders */
+  --border-glass-default: rgba(255, 255, 255, 0.08);
+  --border-glass-hover: rgba(255, 255, 255, 0.16);
+  --border-glass-laser: rgba(0, 255, 102, 0.28);
+  --border-glass-risk: rgba(255, 45, 85, 0.35);
+
+  /* Shadows & Neon Drops */
+  --shadow-glass-depth: 0 8px 32px 0 rgba(0, 0, 0, 0.55);
+  --shadow-laser-glow: 0 0 20px rgba(0, 255, 102, 0.25);
+  --shadow-laser-glow-lg: 0 0 35px rgba(0, 255, 102, 0.45);
+  --shadow-risk-glow: 0 0 20px rgba(255, 45, 85, 0.3);
+
+  /* Radii */
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-full: 9999px;
+
+  /* Blur Filters */
+  --glass-blur-default: blur(16px);
+  --glass-blur-heavy: blur(24px);
+
+  /* Typography */
+  --font-family-ui: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-family-telemetry: "Space Grotesk", "JetBrains Mono", monospace;
+}

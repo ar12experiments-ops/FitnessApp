@@ -1,0 +1,181 @@
+/* ==========================================================================
+   TransformNXT: Glassmorphism Architecture
+   ========================================================================== */
+
+/* Universal Reset & Base Styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  font-family: var(--font-family-ui);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Background Atmospheric Glow */
+body::before {
+  content: "";
+  position: fixed;
+  top: -150px;
+  right: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 255, 102, 0.08) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  bottom: -150px;
+  left: -150px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.05) 0%, rgba(0, 0, 0, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Master Glass Card */
+.glass-card {
+  background: var(--bg-surface-glass);
+  backdrop-filter: var(--glass-blur-default);
+  -webkit-backdrop-filter: var(--glass-blur-default);
+  border: 1px solid var(--border-glass-default);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-glass-depth);
+  padding: 20px;
+  position: relative;
+  transition: border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.glass-card:hover {
+  background: var(--bg-surface-glass-hover);
+  border-color: var(--border-glass-laser);
+  box-shadow: var(--shadow-glass-depth), var(--shadow-laser-glow);
+}
+
+.glass-card-interactive {
+  cursor: pointer;
+}
+
+.glass-card-interactive::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+  background: transparent;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.glass-card-interactive.active::before,
+.glass-card-interactive:hover::before {
+  background: var(--accent-laser-green);
+  box-shadow: 0 0 12px var(--accent-laser-green);
+}
+
+/* Elevation for Modals & Overlays */
+.glass-modal {
+  background: var(--bg-surface-elevated);
+  backdrop-filter: var(--glass-blur-heavy);
+  -webkit-backdrop-filter: var(--glass-blur-heavy);
+  border: 1px solid var(--border-glass-laser);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 16px 48px 0 rgba(0, 0, 0, 0.75), var(--shadow-laser-glow-lg);
+}
+
+/* Telemetry Pills / Badges */
+.telemetry-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: var(--font-family-telemetry);
+  white-space: nowrap;
+}
+
+.badge-optimal {
+  background: rgba(0, 255, 102, 0.12);
+  color: var(--telemetry-optimal);
+  border: 1px solid rgba(0, 255, 102, 0.35);
+  box-shadow: 0 0 8px rgba(0, 255, 102, 0.15);
+}
+
+.badge-cyan {
+  background: rgba(0, 240, 255, 0.12);
+  color: var(--telemetry-cyan);
+  border: 1px solid rgba(0, 240, 255, 0.35);
+}
+
+.badge-warning {
+  background: rgba(255, 184, 0, 0.12);
+  color: var(--telemetry-amber);
+  border: 1px solid rgba(255, 184, 0, 0.35);
+}
+
+.badge-risk {
+  background: rgba(255, 45, 85, 0.15);
+  color: var(--telemetry-crimson);
+  border: 1px solid rgba(255, 45, 85, 0.45);
+  box-shadow: 0 0 12px rgba(255, 45, 85, 0.25);
+}
+
+.badge-purple {
+  background: rgba(191, 90, 242, 0.12);
+  color: var(--telemetry-purple);
+  border: 1px solid rgba(191, 90, 242, 0.35);
+}
+
+/* Pulsing Status Beacons */
+@keyframes laser-beacon-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(0, 255, 102, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+}
+
+@keyframes risk-beacon-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 45, 85, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(255, 45, 85, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 45, 85, 0); }
+}
+
+.beacon-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.beacon-dot.optimal {
+  background: var(--accent-laser-green);
+  animation: laser-beacon-pulse 2s infinite;
+}
+
+.beacon-dot.risk {
+  background: var(--telemetry-crimson);
+  animation: risk-beacon-pulse 1.8s infinite;
+}
+
+.beacon-dot.warning {
+  background: var(--telemetry-amber);
+}

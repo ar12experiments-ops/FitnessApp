@@ -1,0 +1,35 @@
+# System Context and Logic: Evidence-Based Indian Fitness Application
+
+## 1. Demographic & Clinical Directives (CRITICAL)
+When building the logic, database, and recommendation engines, adhere strictly to these constraints:
+*   **BMI Logic (Asian-Indian Standard):** 
+    *   Underweight: < 18.5
+    *   Normal: 18.5 - 22.9
+    *   Overweight: 23.0 - 24.9
+    *   Obese: >= 25.0
+*   **Dietary Logic:**
+    *   Base all food recommendations on the Indian Food Composition Tables (IFCT) published by ICMR-NIN (Indian Council of Medical Research - National Institute of Nutrition).
+    *   Meals must default to regional Indian diets (North Indian, South Indian, East, West) with vegetarian, eggetarian, non-vegetarian, vegan, and Jain splits. Do not suggest ingredients foreign to standard Indian grocery availability (e.g., substitute kale/quinoa with spinach/palak/methi and millets like jowar, bajra, ragi).
+*   **Health Claims:** Do not diagnose medical conditions. Output must explicitly state that recommendations are for general fitness and non-clinical use.
+
+## 2. Core Data Entities & Schema Requirements
+Construct the application with the following data relationships:
+
+*   **Users:** `user_id`, `name`, `age`, `gender`, `dietary_preference` (Veg, Non-Veg, Eggetarian, Vegan, Jain), `region_cuisine` (North, South, East, West), `activity_level` (Sedentary, Light, Moderate, Heavy).
+*   **Health_Logs (Time-series data):** `log_id`, `user_id`, `timestamp`, `weight_kg`, `height_cm`, `bmi_calculated`, `visceral_fat_rating`, `subcutaneous_fat_percent`, `muscle_mass_kg`, `body_fat_percent`, `bmr_kcal`, `body_water_percent`.
+*   **Weekly_Plans:** `plan_id`, `user_id`, `start_date`, `end_date`, `target_daily_calories`, `target_protein_g`, `target_carbs_g`, `target_fats_g`, `target_fiber_g`, `exercise_routine_json`, `meal_plan_template_json`.
+*   **Daily_Tracking:** `track_id`, `user_id`, `date`, `calories_consumed`, `protein_consumed`, `carbs_consumed`, `fats_consumed`, `fiber_consumed`, `exercises_completed_json`, `compliance_score_percent`.
+
+## 3. Algorithmic Processing Logic
+When a user updates their `Health_Logs`, the app must trigger the following workflow:
+1.  **Metric Analysis:** 
+    *   Evaluate Visceral Fat (scale 1-59; standard scale: 1-9 Normal, 10-14 High, >13/14 High Risk) and Muscle Mass against age/gender norms.
+    *   Evaluate Asian-Indian BMI category.
+2.  **Phenotype Identification & Goal Derivation:** 
+    *   *High Visceral Fat + High BMI:* Prioritize a moderate caloric deficit (300-500 kcal) with Zone 2 cardio (150-200 min/week) and fundamental compound resistance training.
+    *   *Normal BMI + High Visceral Fat ("Thin-Fat" Phenotype):* Prioritize body recomposition: slight caloric deficit (150-250 kcal) or isocaloric maintenance, elevated protein (1.2-1.5 g/kg), progressive resistance training (3-4 days/week) to build skeletal muscle, combined with Zone 2 cardio for visceral fat mobilization.
+    *   *Low Muscle Mass + Normal/Low BMI (Sarcopenia / Frailty Risk):* Caloric maintenance or modest surplus (200-300 kcal), progressive resistance training focusing on hypertrophy, protein intake at 1.4-1.6 g/kg.
+    *   *Healthy Baseline:* Maintenance calories, balanced macro distribution (50% C, 20% P, 30% F), and progressive fitness development.
+3.  **Plan Matching & Adherence Engine:**
+    *   Computes daily compliance score:
+        Score = 0.35 * (Calorie Accuracy) + 0.35 * (Protein Floor Match) + 0.20 * (Workout Volume Match) + 0.10 * (Hydration & Fiber Match).

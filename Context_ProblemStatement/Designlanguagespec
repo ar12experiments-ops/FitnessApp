@@ -1,0 +1,32 @@
+# UI/UX Design Language Specification: TransformNXT
+
+## 1. Overall Aesthetic & Theme
+The application, **TransformNXT**, must strictly follow a **"Cyber-Clinical Glass"** design language. It merges a high-end, premium biomedical dashboard aesthetic with modern glassmorphism UI principles. The look is futuristic, hyper-minimalist, and heavily reliant on deep space dark mode combined with vivid neon accents.
+
+*   **Primary Mode:** Dark Mode ONLY (No light mode option).
+*   **Vibe:** Scientific, premium, authoritative, sleek, and high-performance.
+*   **Visual Motif:** Frosted glass panes floating in deep space, framed by laser-like bright green light.
+
+## 2. Color Palette
+The color system relies on infinite blacks and deep charcoals, using translucent layers and a powerful primary accent color for structure and hierarchy.
+
+*   **Background Base:** `#000000` (Pure Black) or `#080808` for the main canvas to ensure absolute contrast.
+*   **Primary Accent (The "Laser" Glow):** `#00FF66` (Bright Cyber Green). This is the core brand color for TransformNXT. It is used for active states, completion metrics, and structural glowing borders.
+*   **Surface/Card Backgrounds (Glass Layer):** `rgba(25, 25, 25, 0.6)`. This translucent layer creates the frosted glass effect over the dark background.
+*   **Primary Text:** `#FFFFFF` (Pure White) for high contrast headers and active data.
+*   **Secondary Text:** `#8E8E93` (Muted Grey) for labels, units (e.g., 'kcal', 'kg'), and timestamps.
+*   **Warning/Deficit:** `#FF2D55` (Neon Red/Pink) - Use strictly for missed goals or high-risk metrics (e.g., High Visceral Fat).
+
+## 3. Glassmorphism Execution (CSS Logic)
+Cards and containers must not be solid blocks. They should utilize CSS backdrop-filter properties combined with semi-transparent backgrounds and delicate borders to create a rich yet elegant design.
+
+```css
+/* Core Glassmorphism CSS Reference */
+.glass-card {
+    background: rgba(20, 20, 20, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 255, 102, 0.15); /* Subtle green glass edge */
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border-radius: 16px;
+}

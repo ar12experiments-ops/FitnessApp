@@ -1,15 +1,19 @@
 /**
- * Weekly Plan View Component: TransformNXT (Light Minimalist Glass)
+ * Weekly Plan View Component: TransformNXT (Light Liquid Glass Theme)
  * Displays the evidence-based 7-day Indian meal plan and progressive workout routine.
+ * Features YouTube instructional video links with an inbuilt in-app video viewer.
  */
 
 import { dbService } from "../storage/db.js";
+import { getExerciseById, getYoutubeEmbedUrl } from "../data/exercise-library.js";
 
 export class PlanView {
   constructor(app) {
     this.app = app;
     this.container = document.getElementById("view-plan");
     this.selectedDayIndex = 0; // Monday default
+    this.activeInlineVideoId = null;
+    this.boundKeyDownHandler = null;
   }
 
   async render() {
@@ -133,31 +137,81 @@ export class PlanView {
             </div>
           </div>
 
-          <!-- Exercises List -->
-          <div style="display: flex; flex-direction: column; gap: 10px;">
-            ${(currentWorkoutDay ? currentWorkoutDay.exercises : []).map(ex => `
-              <div class="workout-item-card">
-                <div style="display: flex; justify-content: space-between; align-items: baseline;">
-                  <div>
-                    <strong style="color: var(--text-primary); font-size: 0.9375rem;">${ex.name}</strong>
-                    <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">
-                      Target: <span style="color: var(--accent-green); font-weight: 600;">${ex.target_muscle}</span> (${ex.movement_type})
+          <!-- Exercises List with Inbuilt YouTube Video Player -->
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            ${(currentWorkoutDay ? currentWorkoutDay.exercises : []).map(ex => {
+              const fullEx = getExerciseById(ex.id) || ex;
+              const ytId = ex.youtube_id || fullEx.youtube_id || "IODxDxX7oi4";
+              const ytTitle = ex.youtube_title || fullEx.youtube_title || `${ex.name} Tutorial`;
+              const setsReps = `${ex.default_sets || 3} sets &bull; ${ex.default_reps || "10-12"}`;
+              const muscle = ex.target_muscle || "Full Body";
+              const movement = ex.movement_type || "compound";
+              const category = (ex.category || "strength").toUpperCase();
+
+              return `
+                <div class="workout-item-card" id="ex-card-${ex.id}">
+                  <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                    <div>
+                      <strong style="color: var(--text-primary); font-size: 0.9375rem;">${ex.name}</strong>
+                      <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 2px;">
+                        Target: <span style="color: var(--accent-blue); font-weight: 600;">${muscle}</span> (${movement})
+                      </div>
+                    </div>
+                    <div style="text-align: right;">
+                      <span class="telemetry-badge badge-cyan" style="font-size: 0.6875rem;">${setsReps}</span>
                     </div>
                   </div>
-                  <div style="text-align: right;">
-                    <span class="telemetry-badge badge-cyan" style="font-size: 0.6875rem;">${ex.default_sets} sets &bull; ${ex.default_reps}</span>
+
+                  <div style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4; margin-top: 6px;">
+                    ${ex.instructions}
                   </div>
-                </div>
 
-                <div style="font-size: 0.75rem; color: var(--text-secondary); line-height: 1.4; margin-top: 4px;">
-                  ${ex.instructions}
-                </div>
+                  <div style="font-size: 0.6875rem; color: var(--accent-orange-hover); margin-top: 4px;">
+                    💡 Home alternative: ${ex.home_alternative || "Bodyweight modification"}
+                  </div>
 
-                <div style="font-size: 0.6875rem; color: var(--accent-orange-hover); margin-top: 2px;">
-                  Home alternative: ${ex.home_alternative}
+                  <!-- Exercise Video Actions & YouTube Link Bar -->
+                  <div class="exercise-video-bar">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <!-- Primary Action: Inbuilt Modal Viewer (No redirect) -->
+                      <button class="btn-video-watch btn-open-video-modal"
+                        data-exercise-name="${ex.name}"
+                        data-youtube-id="${ytId}"
+                        data-title="${ytTitle}"
+                        data-category="${category}"
+                        data-prescription="${setsReps}"
+                        data-muscle="${muscle}"
+                        data-instructions="${encodeURIComponent(ex.instructions || '')}"
+                        title="Watch form video inside inbuilt player">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                        Watch Video
+                      </button>
+
+                      <!-- Secondary Action: Inline Accordion Toggle -->
+                      <button class="btn-video-inline-toggle btn-toggle-inline-video"
+                        data-exercise-id="${ex.id}"
+                        data-youtube-id="${ytId}"
+                        title="Toggle inline video player">
+                        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg>
+                        Inline
+                      </button>
+                    </div>
+
+                    <!-- External Link (Accessible option) -->
+                    <a href="https://www.youtube.com/watch?v=${ytId}" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      style="font-size: 0.6875rem; color: #DC2626; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 3px;"
+                      title="Open video on YouTube in a new tab">
+                      YouTube ↗
+                    </a>
+                  </div>
+
+                  <!-- Inline Collapsible Video Container -->
+                  <div class="inline-video-collapse" id="inline-video-${ex.id}"></div>
                 </div>
-              </div>
-            `).join("")}
+              `;
+            }).join("")}
           </div>
         </div>
 
@@ -168,6 +222,7 @@ export class PlanView {
   }
 
   attachEvents() {
+    // Day switcher tabs
     this.container.querySelectorAll(".hud-tab-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         this.selectedDayIndex = parseInt(btn.dataset.dayIndex, 10);
@@ -175,8 +230,148 @@ export class PlanView {
       });
     });
 
+    // Log day plan button
     document.getElementById("btn-log-day-plan")?.addEventListener("click", () => {
       this.app.navigateTo("tracking");
     });
+
+    // 1. Inbuilt Video Modal Trigger
+    this.container.querySelectorAll(".btn-open-video-modal").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const ytId = btn.dataset.youtubeId;
+        const exName = btn.dataset.exerciseName;
+        const title = btn.dataset.title;
+        const category = btn.dataset.category;
+        const prescription = btn.dataset.prescription;
+        const muscle = btn.dataset.muscle;
+        const instructions = decodeURIComponent(btn.dataset.instructions || "");
+
+        this.openVideoModal({
+          youtubeId: ytId,
+          name: exName,
+          title: title,
+          category: category,
+          prescription: prescription,
+          muscle: muscle,
+          instructions: instructions
+        });
+      });
+    });
+
+    // 2. Inline Accordion Video Toggle
+    this.container.querySelectorAll(".btn-toggle-inline-video").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.preventDefault();
+        const exId = btn.dataset.exerciseId;
+        const ytId = btn.dataset.youtubeId;
+        this.toggleInlineVideo(exId, ytId, btn);
+      });
+    });
+
+    // 3. Modal Close Handlers
+    this.setupModalControls();
+  }
+
+  /**
+   * Opens the in-app video modal and begins playback
+   */
+  openVideoModal({ youtubeId, name, title, category, prescription, muscle, instructions }) {
+    const modal = document.getElementById("inbuilt-video-modal");
+    const iframe = document.getElementById("video-modal-iframe");
+    const titleEl = document.getElementById("video-modal-title");
+    const badgeEl = document.getElementById("video-modal-badge");
+    const prescriptionEl = document.getElementById("video-modal-prescription");
+    const cuesEl = document.getElementById("video-modal-cues");
+    const ytLink = document.getElementById("video-modal-yt-link");
+
+    if (!modal || !iframe) return;
+
+    // Update metadata
+    if (titleEl) titleEl.textContent = title || `${name} Tutorial`;
+    if (badgeEl) badgeEl.textContent = `${category || "STRENGTH"} • ${muscle || "TARGET"}`;
+    if (prescriptionEl) prescriptionEl.innerHTML = prescription || "3 sets • 10-12 reps";
+    if (cuesEl) cuesEl.innerHTML = `<strong>Form Guidance:</strong> ${instructions || "Maintain strict posture, control tempo, and focus on full range of motion."}`;
+    if (ytLink) ytLink.href = `https://www.youtube.com/watch?v=${youtubeId}`;
+
+    // Set YouTube Embed with Autoplay
+    iframe.src = getYoutubeEmbedUrl(youtubeId);
+
+    // Display modal
+    modal.classList.add("active");
+    modal.setAttribute("aria-hidden", "false");
+    document.body.style.overflow = "hidden"; // Prevent background scroll
+  }
+
+  /**
+   * Closes the in-app video modal and halts video/audio playback
+   */
+  closeVideoModal() {
+    const modal = document.getElementById("inbuilt-video-modal");
+    const iframe = document.getElementById("video-modal-iframe");
+    if (!modal) return;
+
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+    document.body.style.overflow = "";
+
+    // Clear iframe src immediately to stop audio/video
+    if (iframe) {
+      iframe.src = "";
+    }
+  }
+
+  /**
+   * Toggles collapsible inline video inside the exercise card
+   */
+  toggleInlineVideo(exerciseId, youtubeId, btn) {
+    const container = document.getElementById(`inline-video-${exerciseId}`);
+    if (!container) return;
+
+    const isActive = container.classList.contains("active");
+
+    if (isActive) {
+      // Close inline video
+      container.classList.remove("active");
+      container.innerHTML = "";
+      btn.innerHTML = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 9l-7 7-7-7"/></svg> Inline`;
+      btn.style.background = "#F8FAFC";
+      btn.style.color = "var(--text-secondary)";
+    } else {
+      // Open inline video
+      container.classList.add("active");
+      container.innerHTML = `<iframe src="${getYoutubeEmbedUrl(youtubeId)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+      btn.innerHTML = `<svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 15l7-7 7 7"/></svg> Close`;
+      btn.style.background = "var(--accent-blue-subtle)";
+      btn.style.color = "var(--accent-blue)";
+    }
+  }
+
+  setupModalControls() {
+    const modal = document.getElementById("inbuilt-video-modal");
+    const closeBtn = document.getElementById("btn-close-video-modal");
+
+    // Close on '✕' click
+    closeBtn?.addEventListener("click", () => {
+      this.closeVideoModal();
+    });
+
+    // Close on backdrop click outside the card
+    modal?.addEventListener("click", (e) => {
+      if (e.target === modal) {
+        this.closeVideoModal();
+      }
+    });
+
+    // Close on ESC keydown
+    if (this.boundKeyDownHandler) {
+      window.removeEventListener("keydown", this.boundKeyDownHandler);
+    }
+    this.boundKeyDownHandler = (e) => {
+      if (e.key === "Escape") {
+        this.closeVideoModal();
+      }
+    };
+    window.addEventListener("keydown", this.boundKeyDownHandler);
   }
 }

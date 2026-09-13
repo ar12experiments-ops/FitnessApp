@@ -110,6 +110,46 @@
   <!-- Notification Toast -->
   <div id="app-toast" style="position: fixed; top: 20px; right: 20px; z-index: 9999; display: none; background: rgba(13, 18, 36, 0.92); backdrop-filter: blur(16px); border: 1px solid var(--accent-green); color: var(--text-primary); padding: 14px 22px; border-radius: var(--radius-sm); font-size: 0.875rem; font-weight: 600; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25);"></div>
 
+  <!-- Inbuilt Exercise Video Player Modal -->
+  <div id="inbuilt-video-modal" class="inbuilt-video-modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="inbuilt-video-modal-card">
+      <div class="inbuilt-video-header">
+        <div class="inbuilt-video-title-group">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+            <span class="telemetry-badge badge-orange" id="video-modal-badge">STRENGTH &bull; CHEST</span>
+            <span style="font-size: 0.75rem; color: #DC2626; font-weight: 700; display: flex; align-items: center; gap: 4px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+              INBUILT PLAYER
+            </span>
+          </div>
+          <h3 id="video-modal-title">Exercise Tutorial</h3>
+        </div>
+        <button id="btn-close-video-modal" class="inbuilt-video-close-btn" aria-label="Close Video Player">✕</button>
+      </div>
+
+      <div class="inbuilt-video-player-container">
+        <iframe id="video-modal-iframe" src="" title="Exercise Video Player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+
+      <div class="inbuilt-video-meta">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div style="font-size: 0.8125rem; color: var(--text-secondary);">
+            Prescription: <strong id="video-modal-prescription" style="color: var(--text-primary);">3 sets &bull; 10-12 reps</strong>
+          </div>
+          <div id="video-modal-links" style="display: flex; gap: 10px;">
+            <a id="video-modal-yt-link" href="#" target="_blank" rel="noopener noreferrer" style="font-size: 0.75rem; color: #DC2626; font-weight: 700; display: inline-flex; align-items: center; gap: 4px; text-decoration: none;">
+              Open on YouTube
+              <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+            </a>
+          </div>
+        </div>
+        <div id="video-modal-cues" style="font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5; background: #F8FAFC; padding: 12px 14px; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-blue);">
+          Form instructions will load here...
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Main ES6 Application Bootstrapper -->
   <script type="module" src="js/app.js"></script>
 </body>
